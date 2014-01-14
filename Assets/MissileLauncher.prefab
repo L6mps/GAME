@@ -195,11 +195,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3251f0147b89cd4449f80e076f1ab9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
-  angle: 1.57079637
-  radius: .100000001
-  projectile: {fileID: 100000, guid: 2b4b7b00842f78f40a3a87bc093ef971, type: 2}
-  mouseAngle: 0
+  angleRange: 60
+  range: 5000
+  cooldown: 5
+  projectile: {fileID: 100000, guid: 8fc15c3d9f149bc4392609d619add02a, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

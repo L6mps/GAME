@@ -108,7 +108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f12194a23d097c6488a9459f4b286cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceleration: 10
+  maxSpeed: 100
   speed: 100
+  currentSpeed: 0
   angle: 0
 --- !u!1001 &100100000
 Prefab:

@@ -4,6 +4,9 @@ using System.Collections;
 public class Spawner : MonoBehaviour {
 	public GameObject cannon;
 	public GameObject slot;
+	public GameObject missile;
+	public GameObject nuke;
+	public GameObject mine;
 	static GameObject[] slots =new GameObject[10];
 	GameObject[] cannons= new GameObject[10];
 	int cannonCount=0;
@@ -50,17 +53,42 @@ public class Spawner : MonoBehaviour {
 				if (Mathf.Abs (newPosition.x - slots [i].transform.position.x) < 50 &&
 				    Mathf.Abs (newPosition.y - slots [i].transform.position.y) < 50) {
 					if(cannons[i]!=null){
+						if(controlledCannon==cannons[i].name){
+							Destroy (cannons[i]);
+							switch(SlotProperties.selectedWeapon){
+							case(1): {cannonSpawn (i,cannon);
+								break;}
+							case(2): {cannonSpawn (i,missile);
+								break;}
+							case(3): {cannonSpawn (i,nuke);
+								break;}
+							case(4): {cannonSpawn (i,mine);
+								break;}
+							}
+						}
 						controlledCannon = cannons [i].name;
 					}
 					else{
-						cannons [i] = (GameObject)Instantiate
-							(cannon, slots[i].transform.position, slots[i].transform.rotation);
-						cannons [i].name = cannons [i].name + i;
+						switch(SlotProperties.selectedWeapon){
+						case(1): {cannonSpawn (i,cannon);
+							break;}
+						case(2): {cannonSpawn (i,missile);
+							break;}
+						case(3): {cannonSpawn (i,nuke);
+							break;}
+						case(4): {cannonSpawn (i,mine);
+							break;}
+						}
 					}
 					
 				}
 			}
 		}
 		
+	}
+	void cannonSpawn(int i,GameObject launcher){
+		cannons [i] = (GameObject)Instantiate
+		(launcher, slots[i].transform.position, slots[i].transform.rotation);
+		cannons [i].name = cannons [i].name + i;
 	}
 }

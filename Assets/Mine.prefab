@@ -11,11 +11,11 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 50: {fileID: 5000000}
-  - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
   - 61: {fileID: 6100000}
   m_Layer: 9
-  m_Name: Missile
+  m_Name: Mine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 30, y: 40, z: -1}
+  m_LocalScale: {x: 20, y: 20, z: -1}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!23 &2300000
@@ -44,7 +44,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 99560c22c642d2a4685a8eed055f29ef, type: 2}
+  - {fileID: 2100000, guid: 948d068a1b675434588acf272e6b0377, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -94,9 +94,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8502fd0b282d7e449849199e57639d7, type: 3}
+  m_Script: {fileID: 11500000, guid: f12194a23d097c6488a9459f4b286cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceleration: 0
+  maxSpeed: 100
+  speed: 100
+  currentSpeed: 0
+  angle: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,14 +110,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f12194a23d097c6488a9459f4b286cb5, type: 3}
+  m_Script: {fileID: 11500000, guid: d8502fd0b282d7e449849199e57639d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 10
-  maxSpeed: 100
-  speed: 10
-  currentSpeed: 0
-  angle: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

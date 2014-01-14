@@ -2,15 +2,20 @@
 using System.Collections;
 
 public class CannonControl : MonoBehaviour {
-	public float speed=100;
-	public float angle=Mathf.PI/2F;
-	public float radius=0.1F;
+	public float angleRange=75;
+	public float range=500;
+	public float cooldown=1;
+	private float angle=Mathf.PI/2F;
 	public GameObject projectile;
-	public float mouseAngle=0;
+	private float mouseAngle=0;
 	private float maxAngle;
 	private float minAngle;
 	private float objectAngle;
 	private Quaternion startingRotation;
+	private float reload;
+	public float getReload(){
+		return reload;
+	}
 	
 	// Use this for initialization
 	void Start () {
@@ -23,13 +28,20 @@ public class CannonControl : MonoBehaviour {
 			objectAngle=Mathf.Asin((transform.position.x)/radius);
 		}
 		objectAngle=Mathf.Rad2Deg*objectAngle;
-		maxAngle=objectAngle+75;
-		minAngle=objectAngle-75;
+		maxAngle=objectAngle+angleRange;
+		minAngle=objectAngle-angleRange;
 		angle = objectAngle;
+		reload = cooldown;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if(reload!=cooldown){
+			if(reload<cooldown)
+				reload+=Time.deltaTime;
+			else
+				reload=cooldown;
+		}
 		if(Spawner.getControlledCannon()==transform.parent.name){
 			Vector3 objectPos=transform.position;
 			Vector3 mouse= Input.mousePosition;    
@@ -63,8 +75,9 @@ public class CannonControl : MonoBehaviour {
 				angle-=360;
 			if(angle<=-360)
 				angle+=360;
-			if(Input.GetButtonDown ("Fire1")){
+			if(Input.GetButtonDown ("Fire1") && reload==cooldown){
 				Instantiate(projectile,transform.position,transform.rotation);
+				reload=0;
 			}
 		}
 		else if(angle!=objectAngle){

@@ -6,7 +6,7 @@ public class SlotProperties : MonoBehaviour {
 
 	public GUIStyle sty;
 	public GUIStyle selected;
-	int selectedWeapon=0;
+	public static int selectedWeapon=0;
 	// Use this for initialization
 	void Start () {
 	
