@@ -8,8 +8,8 @@ public class Spawner : MonoBehaviour {
 	public GameObject nuke;
 	public GameObject mine;
 	static GameObject[] slots =new GameObject[10];
-	GameObject[] cannons= new GameObject[10];
-	int cannonCount=0;
+	static GameObject[] cannons= new GameObject[10];
+	static int currentCannon = -1;
 	public static string controlledCannon;
 	public static string getControlledCannon(){
 				return controlledCannon;
@@ -17,6 +17,17 @@ public class Spawner : MonoBehaviour {
 
 	public static Vector3 getSlotPos(int slot) {
 		return slots[slot].transform.position;
+	}
+
+	public static void setControlledCannonByID(int i) {
+		if(cannons[i]!=null) {
+			currentCannon = i;
+			controlledCannon = cannons[i].name;
+		}
+	}
+
+	public static int getControlledCannonByID() {
+		return currentCannon;
 	}
 
 	// Use this for initialization
@@ -67,6 +78,7 @@ public class Spawner : MonoBehaviour {
 							}
 						}
 						controlledCannon = cannons [i].name;
+						currentCannon = i;
 					}
 					else{
 						switch(SlotProperties.selectedWeapon){

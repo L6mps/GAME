@@ -30,7 +30,7 @@ public class CameraBehaviour : MonoBehaviour {
 		zoomDifference = outerZoom - innerZoom;
 		screenSizeMax = 7*screenSizeMin;
 		cross2=(GameObject)Instantiate (cross,new Vector3(0,0,900),transform.rotation);
-
+		
 	}
 	
 	// Update is called once per frame
@@ -115,14 +115,15 @@ public class CameraBehaviour : MonoBehaviour {
 		float dist = Mathf.Sqrt(pos.x*pos.x + pos.y*pos.y);
 		float sinAlpha = pos.y / dist;
 		try {
-						if (pos.x > 0) {
-								pos.y = sinAlpha * cameraZoomedDist;
-								pos.x = Mathf.Sqrt (cameraZoomedDist * cameraZoomedDist - pos.y * pos.y);
-						} else {
-								pos.y = sinAlpha * cameraZoomedDist;
-								pos.x = -Mathf.Sqrt (cameraZoomedDist * cameraZoomedDist - pos.y * pos.y);
-						}
+			if (pos.x > 0) {
+				pos.y = sinAlpha * cameraZoomedDist;
+				pos.x = Mathf.Sqrt (cameraZoomedDist * cameraZoomedDist - pos.y * pos.y);
+			} else {
+				pos.y = sinAlpha * cameraZoomedDist;
+				pos.x = -Mathf.Sqrt (cameraZoomedDist * cameraZoomedDist - pos.y * pos.y);
+			}
 		} catch (System.Exception ex) {
+			ex.GetBaseException();
 			pos.x = 0;
 			if(pos.y>0)
 				pos.y = cameraZoomedDist;
@@ -155,15 +156,17 @@ public class CameraBehaviour : MonoBehaviour {
 			angleDiff = 360-angleDiff;
 		rotatingStep = angleDiff / moveSteps;
 	}
-
+	
 	public void moveToSelectedCannon(int slot) {
-		Vector3 newPos = Spawner.getSlotPos(slot);
-		newPos.z = -1000;
-		moveCamera (newPos);
-		rotateCamera (newPos);
-		moving = true;
-		currentSteps = 0;
-		if(!zoomed)
-			zoomed=true;
+		if(!moving) {
+			Vector3 newPos = Spawner.getSlotPos(slot);
+			newPos.z = -1000;
+			moveCamera (newPos);
+			rotateCamera (newPos);
+			moving = true;
+			currentSteps = 0;
+			if(!zoomed)
+				zoomed=true;
+		}
 	}
 }
