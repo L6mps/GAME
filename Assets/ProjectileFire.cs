@@ -7,6 +7,7 @@ public class ProjectileFire : MonoBehaviour {
 	public float speed=100;
 	public float currentSpeed;
 	public float angle;
+	public GameObject explosion;
 	Vector2 maxVel;
 	float sin;
 	float cos;
@@ -41,6 +42,7 @@ public class ProjectileFire : MonoBehaviour {
 	
 	}
 	void OnCollisionEnter2D(){
+		Instantiate (explosion, transform.position,transform.rotation);
 
 				Destroy (gameObject);
 		}
