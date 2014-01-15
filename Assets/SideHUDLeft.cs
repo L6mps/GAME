@@ -8,9 +8,9 @@ public class SideHUDLeft : MonoBehaviour {
 	public GUIStyle progressBarFront;
 	public GUIStyle progressBarBack;
 	int currentCannon;
-	float[] currentProgress = new float[10];
-	bool[] isProgressing = new bool[10];
-	float[] timerDurations = new float[10];
+	static float[] currentProgress = new float[10];
+	static bool[] isProgressing = new bool[10];
+	static float[] timerDurations = new float[10];
 	private string[] sectorNames = new string[10];
 
 	void Start() {
@@ -29,9 +29,9 @@ public class SideHUDLeft : MonoBehaviour {
 			currentProgress[i] = 1f;
 			isProgressing[i] = false;
 		}
-		moveProgressBar (0,10f);
+		/*moveProgressBar (0,10f);
 		moveProgressBar (1, 15f);
-		moveProgressBar (2, 20f);
+		moveProgressBar (2, 20f);*/
 	}
 
 	void Update() {
@@ -42,13 +42,17 @@ public class SideHUDLeft : MonoBehaviour {
 	    }
 	}
 
-	void moveProgressBar(int slot, float duration) {
+	public static void setTimerDuration(int slot, float duration){
+		timerDurations[slot]=duration;
+	}
+
+	public static void moveProgressBar(int slot, float duration) {
 		currentProgress[slot] = 0f;
 		timerDurations[slot] = duration;
 		isProgressing[slot] = true;
 	}
 
-	void updateProgressBar(int slot) {
+	static void updateProgressBar(int slot) {
 		currentProgress[slot] += Time.deltaTime*1/(timerDurations[slot]);
 		if(currentProgress[slot] >= 1f) {
 			isProgressing[slot] = false;

@@ -13,8 +13,8 @@ public class CannonControl : MonoBehaviour {
 	private float objectAngle;
 	private Quaternion startingRotation;
 	private float reload;
-	public float getReload(){
-		return reload;
+	public float getCooldown(){
+		return cooldown;
 	}
 	
 	// Use this for initialization
@@ -78,6 +78,7 @@ public class CannonControl : MonoBehaviour {
 			if(Input.GetButtonDown ("Fire1") && reload==cooldown){
 				Instantiate(projectile,transform.position,transform.rotation);
 				reload=0;
+				SideHUDLeft.moveProgressBar(Spawner.getControlledCannonByID(),cooldown);
 			}
 		}
 		else if(angle!=objectAngle){
