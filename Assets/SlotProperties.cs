@@ -27,16 +27,16 @@ public class SlotProperties : MonoBehaviour {
 		int xLen = Screen.width/8;
 		int yStep = Screen.height/16;
 		GUI.BeginGroup (new Rect(7*(Screen.width/8), Screen.height/2, Screen.width/8, Screen.height));
-		if(GUI.Button (new Rect (0,0, xLen, yStep), "Weapon 1", selectedWeapon==1?selected:sty)) {
+		if(GUI.Button (new Rect (0,0, xLen, yStep), "Cannon", selectedWeapon==1?selected:sty)) {
 			selectedWeapon = 1;
 		}
-		if(GUI.Button (new Rect (0,yStep*1, xLen, yStep), "Weapon 2", selectedWeapon==2?missileselected:missile)) {
+		if(GUI.Button (new Rect (0,yStep*1, xLen, yStep), "MissileLauncher", selectedWeapon==2?missileselected:missile)) {
 			selectedWeapon = 2;
 		}
-		if(GUI.Button (new Rect (0,yStep*2, xLen, yStep), "Weapon 3", selectedWeapon==3?nukeselected:nuke)) {
+		if(GUI.Button (new Rect (0,yStep*2, xLen, yStep), "NukeLauncher", selectedWeapon==3?nukeselected:nuke)) {
 			selectedWeapon = 3;
 		}
-		if(GUI.Button (new Rect (0,yStep*3, xLen, yStep), "Weapon 4", selectedWeapon==4?mineselected:mine)) {
+		if(GUI.Button (new Rect (0,yStep*3, xLen, yStep), "MineLauncher", selectedWeapon==4?mineselected:mine)) {
 			selectedWeapon = 4;
 		}
 		GUI.EndGroup();
