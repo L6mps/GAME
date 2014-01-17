@@ -10,9 +10,11 @@ public class MothershipSpawner : MonoBehaviour {
 	//private int mothershipsLeft;
 	//private int health=20;
 	public float speed=10;
+	private float direction;
 	//private float radius;
 
 	void Start() {
+		direction = (Random.value < 0.5)?(1f):(-1f);
 		//mothershipsLeft = maxMotherships;
 		//radius=Mathf.Sqrt (Mathf.Pow (transform.position.x,2)+Mathf.Pow (transform.position.y,2));
 	}
@@ -27,7 +29,7 @@ public class MothershipSpawner : MonoBehaviour {
 		orbit ();
 	}
 	void orbit(){
-		transform.position=Quaternion.Euler (0,0,1*Time.deltaTime*speed)*transform.position;
+		transform.position=Quaternion.Euler (0,0,direction*Time.deltaTime*speed)*transform.position;
 	}
 
 	void SpawnMothership() {

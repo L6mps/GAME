@@ -12,7 +12,6 @@ GameObject:
   - 23: {fileID: 2300000}
   - 50: {fileID: 5000000}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
   - 61: {fileID: 6100000}
   - 114: {fileID: 11400004}
   m_Layer: 9
@@ -67,7 +66,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 0
@@ -98,22 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8502fd0b282d7e449849199e57639d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f12194a23d097c6488a9459f4b286cb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  acceleration: 5
-  maxSpeed: 100
-  speed: 1
-  currentSpeed: 0
-  angle: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -130,6 +113,7 @@ MonoBehaviour:
   speed: 1
   currentSpeed: 0
   angle: 0
+  explosion: {fileID: 100000, guid: 44c4e524a9e6e7144918ccf6317e0040, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
