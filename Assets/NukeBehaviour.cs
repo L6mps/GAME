@@ -8,14 +8,14 @@ public class NukeBehaviour : MonoBehaviour {
 	public float currentSpeed;
 	public float angle;
 	public GameObject explosion;
-	Vector2 maxVel;
-	float sin;
-	float cos;
-	Vector2 target;
-	Vector2 targetTemp;
-	float radius;
-	Vector2 checkVel;
-	int direction=1;
+	private Vector2 maxVel;
+	private float sin;
+	private float cos;
+	private Vector2 target;
+	private Vector2 targetTemp;
+	private float radius;
+	private Vector2 checkVel;
+	private int direction=1;
 	// Use this for initialization
 	void Start () {
 		
@@ -26,7 +26,7 @@ public class NukeBehaviour : MonoBehaviour {
 		cos=Mathf.Cos (angle);
 		newVelocity.x=sin*speed;
 		newVelocity.y=cos*speed;
-		target = new Vector2 (2000, 2000);
+		target = new Vector2 (800, 800);
 		targetTemp = target;
 		float targetAngle=Mathf.Asin (target.y/target.magnitude);
 		if(target.x<0){
@@ -38,7 +38,6 @@ public class NukeBehaviour : MonoBehaviour {
 			}
 		}
 		float objectAngle=Mathf.Asin (transform.position.y/(new Vector2(transform.position.x,transform.position.y)).magnitude);
-		//Debug.Log (targetAngle + " " + objectAngle);
 		if(transform.position.x<0){
 			if(transform.position.y<0){
 				objectAngle-=Mathf.PI/2;
@@ -71,7 +70,7 @@ public class NukeBehaviour : MonoBehaviour {
 			if(Mathf.Abs(rigidbody2D.velocity.x)<Mathf.Abs (maxVel.x)){
 				Vector2 newVel = rigidbody2D.velocity;
 				Vector2.Lerp (newVel,maxVel,acceleration*Time.deltaTime);
-				rigidbody2D.AddForce (newVel);
+				rigidbody2D.AddForce (1000*newVel);
 				checkVel=rigidbody2D.velocity;
 			}
 			else{
@@ -80,9 +79,9 @@ public class NukeBehaviour : MonoBehaviour {
 			}
 		}
 		else if(targetTemp.x/targetTemp.magnitude!=rigidbody2D.velocity.x/rigidbody2D.velocity.magnitude){
-			if(Mathf.Abs (targetTemp.x/targetTemp.magnitude-rigidbody2D.velocity.x/rigidbody2D.velocity.magnitude)>0.1f){
+			if(Mathf.Abs (targetTemp.x/targetTemp.y-rigidbody2D.velocity.x/rigidbody2D.velocity.y)>0.1f || targetTemp.x/rigidbody2D.velocity.x<0 || targetTemp.y/rigidbody2D.velocity.y<0){
 				Vector2 oldVel=rigidbody2D.velocity;
-				Vector2 force=new Vector2(oldVel.x*oldVel.x/400,oldVel.y*oldVel.y/400);
+				Vector2 force=new Vector2(oldVel.x*oldVel.x/200,oldVel.y*oldVel.y/200);
 				if(oldVel.x<0){
 					force.x=-force.x;
 					if(oldVel.y<0){
@@ -97,7 +96,7 @@ public class NukeBehaviour : MonoBehaviour {
 				Vector2 tempForce=force;
 				force.x=-tempForce.y*direction;
 				force.y=tempForce.x*direction;
-				rigidbody2D.AddForce (force);
+				rigidbody2D.AddForce (1000*force);
 				Vector2 newVel=rigidbody2D.velocity;
 				transform.rotation =Quaternion.LookRotation (Vector3.forward,new Vector3(newVel.x,newVel.y,0));
 			}
@@ -110,7 +109,7 @@ public class NukeBehaviour : MonoBehaviour {
 				transform.rotation =Quaternion.LookRotation (Vector3.forward,new Vector3(newVel.x,newVel.y,0));
 			}
 		}
-		if(Mathf.Abs (transform.position.x-target.x)<100 && Mathf.Abs (transform.position.y-target.y)<100){
+		if(Mathf.Abs (transform.position.x-target.x)<10 && Mathf.Abs (transform.position.y-target.y)<10){
 			Instantiate(explosion,transform.position,transform.rotation);
 			Destroy (gameObject);
 		}
