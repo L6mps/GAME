@@ -17,6 +17,9 @@ public class NukeBehaviour : MonoBehaviour {
 	private Vector2 checkVel;
 	private int direction=1;
 	// Use this for initialization
+	public void setTarget(Vector2 target){
+		this.target = target;
+	}
 	void Start () {
 		
 		Physics2D.IgnoreLayerCollision (9, 9, true);
@@ -26,8 +29,6 @@ public class NukeBehaviour : MonoBehaviour {
 		cos=Mathf.Cos (angle);
 		newVelocity.x=sin*speed;
 		newVelocity.y=cos*speed;
-		target = new Vector2 (800, 800);
-		targetTemp = target;
 		float targetAngle=Mathf.Asin (target.y/target.magnitude);
 		if(target.x<0){
 			if(target.y<0){

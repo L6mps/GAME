@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour {
 	public GameObject nuke;
 	public GameObject mine;
 	static GameObject[] slots =new GameObject[10];
-	static GameObject[] cannons= new GameObject[10];
+	public static GameObject[] cannons= new GameObject[10];
 	static int currentCannon = -1;
 	public static string controlledCannon;
 	public static string getControlledCannon(){
@@ -102,5 +102,7 @@ public class Spawner : MonoBehaviour {
 		cannons [i] = (GameObject)Instantiate
 		(launcher, slots[i].transform.position, slots[i].transform.rotation);
 		cannons [i].name = cannons [i].name + i;
+		Player.slotPopulation[i]=200000000;
+		Player.population -= 200000000;
 	}
 }

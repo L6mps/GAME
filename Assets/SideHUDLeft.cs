@@ -72,7 +72,7 @@ public class SideHUDLeft : MonoBehaviour {
 				GetComponent<CameraBehaviour>().moveToSelectedCannon(i);
 				Spawner.setControlledCannonByID(i);
 			}
-			GUI.Box (new Rect(boxWidth,(2*i+1)*boxHeight,boxWidth, boxHeight), "0", sty);
+			GUI.Box (new Rect(boxWidth,(2*i+1)*boxHeight,boxWidth, boxHeight), Player.slotPopulation[i].ToString(), sty);
 			GUI.Box (new Rect(0, (2*i+2)*boxHeight, (int)(currentProgress[i]*((float)boxWidth)*2f), boxHeight), "", progressBarBack);
 			GUI.Box (new Rect(0, (2*i+2)*boxHeight, boxWidth*2, boxHeight), currentProgress[i]==1f?"Ready!":"Loading", progressBarFront);
 		}
