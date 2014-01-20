@@ -1221,7 +1221,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portal: {fileID: 100002, guid: 46830528270810a4b984a07bccf820ee, type: 2}
-  portalSpawnRate: 30
 --- !u!23 &1481032242
 Renderer:
   m_ObjectHideFlags: 0

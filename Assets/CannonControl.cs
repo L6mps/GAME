@@ -75,7 +75,7 @@ public class CannonControl : MonoBehaviour {
 				angle-=360;
 			if(angle<=-360)
 				angle+=360;
-			if(Input.GetButtonDown ("Fire1") && reload==cooldown){
+			if(Input.GetMouseButtonDown (0) && reload==cooldown){
 				Instantiate(projectile,transform.position,transform.rotation);
 				reload=0;
 				SideHUDLeft.moveProgressBar(Spawner.getControlledCannonByID(),cooldown);

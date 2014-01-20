@@ -95,7 +95,7 @@ public class NukeControl : MonoBehaviour {
 				angle-=360;
 			if(angle<=-360)
 				angle+=360;
-			if(Input.GetButtonDown ("Fire1") && reload==cooldown){
+			if(Input.GetMouseButtonDown (0) && reload==cooldown){
 				((GameObject)Instantiate(projectile,transform.position,transform.rotation)).GetComponent<NukeBehaviour>().setTarget(new Vector2(mousePos.x,mousePos.y));
 				reload=0;
 				SideHUDLeft.moveProgressBar(Spawner.getControlledCannonByID(),cooldown);
