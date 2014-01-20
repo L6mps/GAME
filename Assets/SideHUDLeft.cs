@@ -3,10 +3,12 @@ using System.Collections;
 
 public class SideHUDLeft : MonoBehaviour {
 
-	public GUIStyle sty;
+	public GUIStyle sectorButtons;
 	public GUIStyle selected;
 	public GUIStyle progressBarFront;
 	public GUIStyle progressBarBack;
+	public GUIStyle enemyButtons;
+	public GUIStyle researchButtons;
 	int currentCannon;
 	static float[] currentProgress = new float[10];
 	static bool[] isProgressing = new bool[10];
@@ -29,9 +31,6 @@ public class SideHUDLeft : MonoBehaviour {
 			currentProgress[i] = 1f;
 			isProgressing[i] = false;
 		}
-		/*moveProgressBar (0,10f);
-		moveProgressBar (1, 15f);
-		moveProgressBar (2, 20f);*/
 	}
 
 	void Update() {
@@ -66,27 +65,27 @@ public class SideHUDLeft : MonoBehaviour {
 		int boxHeight = Screen.height/32;
 
 		GUI.BeginGroup(new Rect(0,0,2*boxWidth, Screen.height));
-		GUI.Box (new Rect(0,0*boxHeight,2*boxWidth, boxHeight), "Sectors", sty);
+		GUI.Box (new Rect(0,0*boxHeight,2*boxWidth, boxHeight), "Sectors", sectorButtons);
 		for(int i=0; i<10; i++) {
-			if(GUI.Button (new Rect(0,(2*i+1)*boxHeight,boxWidth, boxHeight), sectorNames[i],currentCannon==i?selected:sty )) {
+			if(GUI.Button (new Rect(0,(2*i+1)*boxHeight,boxWidth, boxHeight), sectorNames[i],currentCannon==i?selected:sectorButtons )) {
 				GetComponent<CameraBehaviour>().moveToSelectedCannon(i);
 				Spawner.setControlledCannonByID(i);
 			}
-			GUI.Box (new Rect(boxWidth,(2*i+1)*boxHeight,boxWidth, boxHeight), Player.slotPopulation[i].ToString(), sty);
-			GUI.Box (new Rect(0, (2*i+2)*boxHeight, (int)(currentProgress[i]*((float)boxWidth)*2f), boxHeight), "", progressBarBack);
-			GUI.Box (new Rect(0, (2*i+2)*boxHeight, boxWidth*2, boxHeight), currentProgress[i]==1f?"Ready!":"Loading", progressBarFront);
+			GUI.Box (new Rect(boxWidth, (2*i+1)*boxHeight, (int)(currentProgress[i]*((float)boxWidth)), boxHeight), "", progressBarBack);
+			GUI.Box (new Rect(boxWidth, (2*i+1)*boxHeight, boxWidth, boxHeight), currentProgress[i]==1f?"Ready!":"Loading", progressBarFront);
+			GUI.Box (new Rect(0,(2*i+2)*boxHeight,2*boxWidth, boxHeight), Player.slotPopulation[i].ToString(), sectorButtons);
 		}
-		GUI.Box (new Rect(0,21*boxHeight,boxWidth*2, boxHeight), "Enemies", sty);
-		GUI.Box (new Rect(0,22*boxHeight,boxWidth, boxHeight), "Portals", sty);
-		GUI.Box (new Rect(0+boxWidth,22*boxHeight,boxWidth, boxHeight), Player.portalCount.ToString(), sty);
-		GUI.Box (new Rect(0,23*boxHeight,boxWidth, boxHeight), "Motherships", sty);
-		GUI.Box (new Rect(0+boxWidth,23*boxHeight,boxWidth, boxHeight), Player.mothershipCount.ToString(), sty);
-		GUI.Box (new Rect(0,24*boxHeight,boxWidth, boxHeight), "Kamikazes", sty);
-		GUI.Box (new Rect(0+boxWidth,24*boxHeight,boxWidth, boxHeight), Player.kamikazeCount.ToString(), sty);
-		GUI.Box (new Rect(0,28*boxHeight,boxWidth, boxHeight), "Research", sty);
-		GUI.Box (new Rect(0,29*boxHeight,boxWidth, boxHeight), "R1", sty);
-		GUI.Box (new Rect(0,30*boxHeight,boxWidth, boxHeight), "R2", sty);
-		GUI.Box (new Rect(0,31*boxHeight,boxWidth, boxHeight), "R3", sty);
+		GUI.Box (new Rect(0,21*boxHeight,boxWidth*2, boxHeight), "Enemies", enemyButtons);
+		GUI.Box (new Rect(0,22*boxHeight,boxWidth, boxHeight), "Portals", enemyButtons);
+		GUI.Box (new Rect(0+boxWidth,22*boxHeight,boxWidth, boxHeight), Player.portalCount.ToString(), enemyButtons);
+		GUI.Box (new Rect(0,23*boxHeight,boxWidth, boxHeight), "Motherships", enemyButtons);
+		GUI.Box (new Rect(0+boxWidth,23*boxHeight,boxWidth, boxHeight), Player.mothershipCount.ToString(), enemyButtons);
+		GUI.Box (new Rect(0,24*boxHeight,boxWidth, boxHeight), "Kamikazes", enemyButtons);
+		GUI.Box (new Rect(0+boxWidth,24*boxHeight,boxWidth, boxHeight), Player.kamikazeCount.ToString(), enemyButtons);
+		GUI.Box (new Rect(0,25*boxHeight,boxWidth*2, boxHeight), "Research", researchButtons);
+		GUI.Box (new Rect(0,26*boxHeight,boxWidth*2, boxHeight*2), "R1", researchButtons);
+		GUI.Box (new Rect(0,28*boxHeight,boxWidth*2, boxHeight*2), "R2", researchButtons);
+		GUI.Box (new Rect(0,30*boxHeight,boxWidth*2, boxHeight*2), "R3", researchButtons);
 		GUI.EndGroup();
 	}
 }
