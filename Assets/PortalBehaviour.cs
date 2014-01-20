@@ -10,6 +10,7 @@ public class PortalBehaviour : MonoBehaviour {
 	private float direction;
 	
 	void Start () {
+		Physics2D.IgnoreLayerCollision (8, 8, true);
 		this.transform.LookAt(new Vector3(0,0,0), Vector3.back);
 		direction = (Random.value < 0.5)?(1f):(-1f);
 		speed = (float) Random.Range(1,4);
@@ -33,5 +34,9 @@ public class PortalBehaviour : MonoBehaviour {
 		newPos.x += offset*newRand.x;
 		newPos.y += offset*newRand.y;
 		Instantiate(mothership, newPos, Quaternion.identity);
+	}
+	void OnCollisionEnter2D(Collision2D collision){
+		Destroy (gameObject);
+		Player.portalCount--;
 	}
 }

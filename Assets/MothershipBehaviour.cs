@@ -7,8 +7,8 @@ public class MothershipBehaviour : MonoBehaviour {
 	public GameObject enemy;
 	private float offset = 50f;
 	private float EnemySpawnDelay = 20f;
-	
 	void Start () {
+		Physics2D.IgnoreLayerCollision (8, 8, true);
 		direction = (Random.value < 0.5)?(1f):(-1f);
 		this.transform.LookAt(new Vector3(0,0,0), Vector3.back);
 		Player.mothershipCount++;
@@ -42,5 +42,9 @@ public class MothershipBehaviour : MonoBehaviour {
 			GameObject bla = (GameObject) Instantiate(enemy, newPos, Quaternion.identity);
 			bla.GetComponent<EnemyBehaviour>().speedType = fastEnemies == true ? 1 : -1;
 		}
+	}
+	void OnCollisionEnter2D(Collision2D collision){
+		Destroy (gameObject);
+		Player.mothershipCount--;
 	}
 }
