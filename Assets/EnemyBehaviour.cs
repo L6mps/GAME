@@ -2,11 +2,20 @@
 using System.Collections;
 
 public class EnemyBehaviour : MonoBehaviour {
-	public float speed = 0.5f;
+	public static float slowSpeed = 0.01f;
+	public static float fastSpeed = 0.04f;
+	private float speed;
 	public GameObject explosion;
+	public int speedType = 0;
 	
 	// Use this for initialization
 	void Start () {
+		while(speedType == 0) { bool a = true;}
+		if(speedType == 1)
+			speed = fastSpeed;
+		else
+			speed = slowSpeed;
+		Physics2D.IgnoreLayerCollision (8, 8, true);
 		Player.kamikazeCount++;
 		velocityTowardsPlanet();
 		this.transform.LookAt(new Vector3(0,0,0), Vector3.back);
@@ -18,6 +27,7 @@ public class EnemyBehaviour : MonoBehaviour {
 		Vector2 velocity = new Vector2(xSpeed, ySpeed);
 		rigidbody2D.velocity = velocity;
 	}
+
 	void OnCollisionEnter2D(Collision2D collision){
 		Physics2D.IgnoreLayerCollision (8, 8, true);
 		Instantiate (explosion,transform.position,transform.rotation);

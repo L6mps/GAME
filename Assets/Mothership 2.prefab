@@ -24,9 +24,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
-  - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 58: {fileID: 5800000}
+  - 114: {fileID: 11400002}
   m_Layer: 8
   m_Name: Mothership 2
   m_TagString: Untagged
@@ -79,9 +79,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9dfd32e4ce700a4b87114b548110b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 100002, guid: d6f4dfacbff68314cb61b2fd13738caa, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}

@@ -102,6 +102,7 @@ MonoBehaviour:
   speed: 100
   currentSpeed: 0
   angle: 0
+  explosion: {fileID: 100000, guid: 041b631a684519a4b9d17ba8e17a869e, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

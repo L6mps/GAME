@@ -18,7 +18,7 @@ public class CameraBehaviour : MonoBehaviour {
 	private int currentSteps = 0;
 	private int screenSizeMin = Screen.width/8;
 	private int screenSizeMax;
-	private float angle;
+	private float angle = 0f;
 	public GameObject cross;
 	private GameObject cross2;
 	
@@ -71,10 +71,12 @@ public class CameraBehaviour : MonoBehaviour {
 					if(zoomed) {
 						moving = true;
 						zoomed = false;
-						movingTowards = cameraStartPos;
-						cameraAngle = Quaternion.identity;
 						currentSteps = 0;
-						angle = 0;
+						movingTowards = cameraStartPos;
+						movingStep = 600 / moveSteps;
+						cameraAngle = Quaternion.identity;
+						rotatingStep = Mathf.Abs (Mathf.Rad2Deg*angle) / moveSteps;
+						angle = 0f;
 					}
 					else {
 						zoomed = true;
