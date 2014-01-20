@@ -46,7 +46,6 @@ public class CannonControl : MonoBehaviour {
 			Vector3 objectPos=transform.position;
 			Vector3 mouse= Input.mousePosition;
 			Vector3 mousePos=Camera.main.ScreenToWorldPoint (mouse);
-			Debug.Log (mousePos.z+" "+mousePos.magnitude);
 			float mouseRadius=Mathf.Sqrt (Mathf.Pow (mousePos.x-objectPos.x,2)+Mathf.Pow (mousePos.y-objectPos.y,2));
 			if(mouseRadius!=0 && mousePos.y-objectPos.y<0){
 				mouseAngle=-(Mathf.Asin((mousePos.x-objectPos.x)/mouseRadius)+Mathf.PI);
@@ -77,10 +76,10 @@ public class CannonControl : MonoBehaviour {
 				angle+=360;
 			if(Input.GetMouseButtonDown (0) && reload==cooldown){
 				GameObject temp=((GameObject)Instantiate(projectile,transform.position,transform.rotation));
-				Debug.Log (temp.name);
-				if(temp.name=="Mine(Clone)")
+				if(temp.name=="Mine(Clone)"){
 					mousePos.z=0;
 					temp.GetComponent<MineBehaviour>().setTarget(mousePos.magnitude);
+				}
 				reload=0;
 				SideHUDLeft.moveProgressBar(Spawner.getControlledCannonByID(),cooldown);
 			}
