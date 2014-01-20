@@ -17,6 +17,8 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		survival = 0;
+		population = 8000000000;
 		portalCount = 0;
 		mothershipCount = 0;
 		kamikazeCount = 0;

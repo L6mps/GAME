@@ -26,7 +26,6 @@ GameObject:
   - 4: {fileID: 400002}
   - 114: {fileID: 11400000}
   - 58: {fileID: 5800000}
-  - 114: {fileID: 11400002}
   m_Layer: 8
   m_Name: Mothership 2
   m_TagString: Untagged
@@ -80,21 +79,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 100002, guid: d6f4dfacbff68314cb61b2fd13738caa, type: 2}
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5295d80742832ac4bba4596b732f5d93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 100002, guid: d6f4dfacbff68314cb61b2fd13738caa, type: 2}
-  offset: 50
-  EnemySpawnDelay: 8
-  maxEnemies: 100
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

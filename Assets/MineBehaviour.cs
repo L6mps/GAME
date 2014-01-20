@@ -1,20 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ProjectileFire : MonoBehaviour {
+public class MineBehaviour : MonoBehaviour {
 	public float acceleration=10;
 	public float maxSpeed=100;
 	public float speed=100;
 	public float currentSpeed;
 	public float angle;
 	public float range;
+	private float target=float.MaxValue;
+	private float stepX;
+	private float stepY;
 	public GameObject explosion;
 	Vector2 maxVel;
 	float sin;
 	float cos;
+	public void setTarget(float target){
+		this.target = target;
+	}
 	// Use this for initialization
 	void Start () {
-		Physics2D.IgnoreLayerCollision (9, 9, true);
+		Physics2D.IgnoreLayerCollision (10, 8, true);
+		Physics2D.IgnoreLayerCollision (10, 9, true);
+		Physics2D.IgnoreLayerCollision (10, 10, true);
 		angle=(360-transform.rotation.eulerAngles.z)*Mathf.Deg2Rad;
 		Vector2 newVelocity=Vector2.zero;
 		sin=Mathf.Sin (angle);
@@ -31,7 +39,7 @@ public class ProjectileFire : MonoBehaviour {
 		currentSpeed=rigidbody2D.velocity.x/sin;
 		if (rigidbody2D.velocity != maxVel) {
 			if(Mathf.Abs(rigidbody2D.velocity.x)<Mathf.Abs (maxVel.x)){
-
+				
 				Vector2 newVel = rigidbody2D.velocity;
 				Vector2.Lerp (newVel,maxVel,acceleration*Time.deltaTime);
 				rigidbody2D.AddForce (newVel);
@@ -39,16 +47,17 @@ public class ProjectileFire : MonoBehaviour {
 			else
 				rigidbody2D.velocity=maxVel;
 		}
-		if(transform.position.magnitude>=range){
-			if(gameObject.name.Equals("Missile(Clone)"))
-				Instantiate (explosion,transform.position,transform.rotation);
-			Destroy (gameObject);
-		}
-	
-	}
-	void OnCollisionEnter2D(){
-		Instantiate (explosion, transform.position,transform.rotation);
+		if(target-transform.position.magnitude<5){
+			Vector2 newVel=new Vector2(0,0);
+			rigidbody2D.velocity=newVel;
+			Physics2D.IgnoreLayerCollision (10,8,false);
 
-				Destroy (gameObject);
 		}
+
+		
+	}
+	void OnCollisionEnter2D(Collision2D collision){
+			Instantiate (explosion, transform.position,transform.rotation);
+			Destroy (gameObject);
+	}
 }

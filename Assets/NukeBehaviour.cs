@@ -21,7 +21,6 @@ public class NukeBehaviour : MonoBehaviour {
 		this.target = target;
 	}
 	void Start () {
-		
 		Physics2D.IgnoreLayerCollision (9, 9, true);
 		angle=(360-transform.rotation.eulerAngles.z)*Mathf.Deg2Rad;
 		Vector2 newVelocity=Vector2.zero;
@@ -80,7 +79,7 @@ public class NukeBehaviour : MonoBehaviour {
 			}
 		}
 		else if(targetTemp.x/targetTemp.magnitude!=rigidbody2D.velocity.x/rigidbody2D.velocity.magnitude){
-			if(Mathf.Abs (targetTemp.x/targetTemp.y-rigidbody2D.velocity.x/rigidbody2D.velocity.y)>0.1f || targetTemp.x/rigidbody2D.velocity.x<0 || targetTemp.y/rigidbody2D.velocity.y<0){
+			if(Mathf.Abs (targetTemp.x/targetTemp.y-rigidbody2D.velocity.x/rigidbody2D.velocity.y)>1f || targetTemp.x/rigidbody2D.velocity.x<0 || targetTemp.y/rigidbody2D.velocity.y<0){
 				Vector2 oldVel=rigidbody2D.velocity;
 				Vector2 force=new Vector2(oldVel.x*oldVel.x/200,oldVel.y*oldVel.y/200);
 				if(oldVel.x<0){
