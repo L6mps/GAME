@@ -17,6 +17,8 @@ public class SlotProperties : MonoBehaviour {
 	public Texture missileI;
 	public Texture mineI;
 	public Texture nukeI;
+	public GUIStyle progressBarBack;
+	public GUIStyle progressBarFront;
 	public static int selectedWeapon=0;
 	int currentCannon;
 	// Use this for initialization
@@ -71,6 +73,28 @@ public class SlotProperties : MonoBehaviour {
 			GUI.Label (new Rect (0, 3*labelSize, xLen, labelSize)," Speed: "+(cannon?info[1]:"n/a"));
 			GUI.Label (new Rect (0, 4*labelSize, xLen, labelSize)," Range: "+(cannon?info[2]:"n/a"));
 			GUI.Label (new Rect (0, 5*labelSize, xLen, labelSize)," Angle: "+(cannon?info[3]:"n/a"));
+			if(cannon){
+				switch (info[0]){
+				case "cannon":{
+					GUI.Label(new Rect(0,6*labelSize,xLen,xLen), cannonI);
+					break;
+				}
+				case "missile":{
+					GUI.Label(new Rect(0,6*labelSize,xLen,xLen), missileI);
+					break;
+				}
+				case "nuke":{
+					GUI.Label(new Rect(0,6*labelSize,xLen,xLen), nukeI);
+					break;
+				}
+				case "mine":{
+					GUI.Label(new Rect(0,6*labelSize,xLen,xLen), mineI);
+					break;
+				}
+				}
+				GUI.Box (new Rect(xLen/8, 6*labelSize+xLen, (int)(SideHUDLeft.currentProgress[currentCannon]*((float)6*xLen/8)), 2*labelSize), "", progressBarBack);
+				GUI.Box (new Rect(xLen/8, 6*labelSize+xLen, 6*xLen/8, 2*labelSize), SideHUDLeft.currentProgress[currentCannon]==1f?"Ready!":"Loading", progressBarFront);
+			}
 		}
 		else{
 			GUI.Label (new Rect (0, 0, xLen, labelSize)," Not selected");
@@ -91,26 +115,22 @@ public class SlotProperties : MonoBehaviour {
 			if(Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>()!=null){
 				info[0]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().cannonType;
 				if(info[0].Equals("cannon")){
-					GUI.Label (new Rect(0,0,0,0),cannonI);
 					info[1]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().projectile.GetComponent<ProjectileFire>().maxSpeed.ToString();
 					info[2]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().projectile.GetComponent<ProjectileFire>().range.ToString();
 					info[3]=(Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().angleRange*2).ToString();
 				}
 				else if(info[0].Equals ("missile")){
-					GUI.Label (new Rect(0,0,0,0),missileI);
 					info[1]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().projectile.GetComponent<ProjectileFire>().maxSpeed.ToString();
 					info[2]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().projectile.GetComponent<ProjectileFire>().range.ToString();
 					info[3]=(Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().angleRange*2).ToString();
 				}
 				else if(info[0].Equals ("mine")){
-					GUI.Label (new Rect(0,0,0,0),mineI);
 					info[1]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().projectile.GetComponent<MineBehaviour>().maxSpeed.ToString();
 					info[2]="infinite";
 					info[3]=(Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().angleRange*2).ToString();
 				}
 			}
 			else if(Spawner.cannons[currentCannon].GetComponentInChildren<NukeControl>()!=null){
-				GUI.Label (new Rect(0,0,0,0),nukeI);
 				info[0]=Spawner.cannons[currentCannon].GetComponentInChildren<NukeControl>().cannonType;
 				info[1]=Spawner.cannons[currentCannon].GetComponentInChildren<NukeControl>().projectile.GetComponent<NukeBehaviour>().maxSpeed.ToString();
 				info[2]="infinite";
