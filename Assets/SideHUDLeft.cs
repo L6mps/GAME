@@ -14,6 +14,10 @@ public class SideHUDLeft : MonoBehaviour {
 	static bool[] isProgressing = new bool[10];
 	static float[] timerDurations = new float[10];
 	private string[] sectorNames = new string[10];
+	public static bool[] researchState = new bool[20];
+	public static int selectedResearch=-1;
+	private int researchingWeapon=-1;
+	static float researchProgress = 0;
 
 	void Start() {
 		currentCannon = Spawner.getControlledCannonByID();
@@ -31,6 +35,10 @@ public class SideHUDLeft : MonoBehaviour {
 			currentProgress[i] = 1f;
 			isProgressing[i] = false;
 		}
+		researchState [0] = true;
+		for(int i = 1;i<20;i++){
+			researchState[i]=false;
+		}
 	}
 
 	void Update() {
@@ -39,6 +47,14 @@ public class SideHUDLeft : MonoBehaviour {
 			if(isProgressing[i])
 				updateProgressBar(i);
 	    }
+		if(researchingWeapon!=-1){
+			researchProgress+=Time.deltaTime/10;
+			if(researchProgress>=1) {
+				researchState[researchingWeapon]=true;
+				researchingWeapon=-1;
+				researchProgress=0;
+			}
+		}
 	}
 
 	public static void setTimerDuration(int slot, float duration){
@@ -83,9 +99,47 @@ public class SideHUDLeft : MonoBehaviour {
 		GUI.Box (new Rect(0,24*boxHeight,boxWidth, boxHeight), "Kamikazes", enemyButtons);
 		GUI.Box (new Rect(0+boxWidth,24*boxHeight,boxWidth, boxHeight), Player.kamikazeCount.ToString(), enemyButtons);
 		GUI.Box (new Rect(0,25*boxHeight,boxWidth*2, boxHeight), "Research", researchButtons);
-		GUI.Box (new Rect(0,26*boxHeight,boxWidth*2, boxHeight*2), "R1", researchButtons);
-		GUI.Box (new Rect(0,28*boxHeight,boxWidth*2, boxHeight*2), "R2", researchButtons);
-		GUI.Box (new Rect(0,30*boxHeight,boxWidth*2, boxHeight*2), "R3", researchButtons);
+		for(int i=0;i<4;i++){
+			if(researchingWeapon!=i){
+				if(GUI.Button (new Rect(0,(26+i*1.5f)*boxHeight,boxWidth,boxHeight*1.5f), "R"+i, selectedResearch==i?selected:(researchState[i]?sectorButtons:researchButtons))){
+					if(researchState[i]){
+						selectedResearch=i;
+					}
+					else if(researchingWeapon==-1){
+						researchingWeapon=i;
+					}
+				}
+			}
+			else{
+				GUI.Box (new Rect(0,(26+i*1.5f)*boxHeight, (int)(researchProgress*((float)boxWidth)), boxHeight*1.5f), "", progressBarBack);
+				GUI.Box (new Rect(0,(26+i*1.5f)*boxHeight,boxWidth,boxHeight*1.5f), "R"+i, progressBarFront);
+			}
+		}
 		GUI.EndGroup();
+		if(selectedResearch!=-1){
+			researchSelection(selectedResearch);
+		}
+	}
+	void researchSelection(int r){
+		int boxWidth = Screen.width/16;
+		int boxHeight = Screen.height/32;
+		for(int j=0;j<3;j++){
+				if(researchingWeapon!=(r+1)*4+j){
+					if(!researchState[(r+1)*4+j]){
+						if(GUI.Button (new Rect(boxWidth,(26+2*j)*boxHeight,boxWidth,boxHeight*2), "V"+j, researchButtons)){
+							if(researchingWeapon==-1){
+								researchingWeapon=(r+1)*4+j;
+							}
+						}
+					}
+					else{
+						GUI.Box (new Rect(boxWidth,(26+2*j)*boxHeight,boxWidth,boxHeight*2), "V"+j, selected);
+					}
+				}
+				else{
+						GUI.Box (new Rect(boxWidth,(26+2*j)*boxHeight, (int)(researchProgress*((float)boxWidth)), boxHeight*2), "", progressBarBack);
+						GUI.Box (new Rect(boxWidth,(26+2*j)*boxHeight,boxWidth,boxHeight*2), "V"+j, progressBarFront);
+				}
+		}
 	}
 }
