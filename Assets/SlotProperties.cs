@@ -15,14 +15,16 @@ public class SlotProperties : MonoBehaviour {
 	public static int selectedWeapon=0;
 	// Use this for initialization
 	void Start () {
-	
+		sty.fontSize = Screen.height / 50;
+		missile.fontSize = Screen.height / 50;
+		nuke.fontSize = Screen.height / 50;
+		mine.fontSize = Screen.height / 50;
+		selected.fontSize = Screen.height / 50;
+		missileselected.fontSize = Screen.height / 50;
+		nukeselected.fontSize = Screen.height / 50;
+		mineselected.fontSize = Screen.height / 50;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	void OnGUI() {
 		int xLen = Screen.width/8;
 		int yStep = Screen.height/16;

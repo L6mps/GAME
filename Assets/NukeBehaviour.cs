@@ -13,7 +13,6 @@ public class NukeBehaviour : MonoBehaviour {
 	private float cos;
 	private Vector2 target;
 	private Vector2 targetTemp;
-	private float radius;
 	private Vector2 checkVel;
 	private int direction=1;
 	// Use this for initialization
@@ -56,7 +55,6 @@ public class NukeBehaviour : MonoBehaviour {
 		}
 		rigidbody2D.velocity=newVelocity;
 		maxVel = new Vector2 (sin * maxSpeed, cos * maxSpeed);
-		radius = maxVel.magnitude;
 		currentSpeed = speed;
 		checkVel = newVelocity;
 	}

@@ -10,7 +10,7 @@ public class EnemyBehaviour : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		while(speedType == 0) { bool a = true;}
+		while(speedType == 0) {}
 		if(speedType == 1)
 			speed = fastSpeed;
 		else

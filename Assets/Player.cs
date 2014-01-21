@@ -44,7 +44,6 @@ public class Player : MonoBehaviour {
 		population += (population / populationGrowth) * 0.1 * (double) Random.Range(5, 20);
 	}
 	void OnCollisionEnter2D(Collision2D collision){
-		Debug.Log (collision.transform.position.x + " " + collision.transform.position.y);
 		int slot=0;
 		float decrease=  Random.Range(50000000, 100000000);
 		float collisionAngle=-Mathf.Rad2Deg*Mathf.Acos (collision.transform.position.x/collision.transform.position.magnitude);

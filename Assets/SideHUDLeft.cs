@@ -9,6 +9,8 @@ public class SideHUDLeft : MonoBehaviour {
 	public GUIStyle progressBarBack;
 	public GUIStyle enemyButtons;
 	public GUIStyle researchButtons;
+	public GUIStyle black;
+	public GUIStyle armyMen;
 	int currentCannon;
 	static float[] currentProgress = new float[10];
 	static bool[] isProgressing = new bool[10];
@@ -20,6 +22,11 @@ public class SideHUDLeft : MonoBehaviour {
 	static float researchProgress = 0;
 
 	void Start() {
+		sectorButtons.fontSize = Screen.height / 50;
+		selected.fontSize = Screen.height / 50;
+		progressBarFront.fontSize = Screen.height / 50;
+		enemyButtons.fontSize = Screen.height / 50;
+		researchButtons.fontSize = Screen.height / 50;
 		currentCannon = Spawner.getControlledCannonByID();
 		sectorNames[0] = "Alpha";
 		sectorNames[1] = "Bravo";
@@ -89,7 +96,8 @@ public class SideHUDLeft : MonoBehaviour {
 			}
 			GUI.Box (new Rect(boxWidth, (2*i+1)*boxHeight, (int)(currentProgress[i]*((float)boxWidth)), boxHeight), "", progressBarBack);
 			GUI.Box (new Rect(boxWidth, (2*i+1)*boxHeight, boxWidth, boxHeight), currentProgress[i]==1f?"Ready!":"Loading", progressBarFront);
-			GUI.Box (new Rect(0,(2*i+2)*boxHeight,2*boxWidth, boxHeight), Player.slotPopulation[i].ToString(), sectorButtons);
+			GUI.Box (new Rect(0,(2*i+2)*boxHeight,2*boxWidth, boxHeight), "", armyMen);
+			GUI.Box (new Rect(boxWidth*2-2, (2*i+2)*boxHeight+2, (float) -(8f-(float)Player.slotPopulation[i]/25000000)*boxWidth*0.25f+4, boxHeight-4),"", black);
 		}
 		GUI.Box (new Rect(0,21*boxHeight,boxWidth*2, boxHeight), "Enemies", enemyButtons);
 		GUI.Box (new Rect(0,22*boxHeight,boxWidth, boxHeight), "Portals", enemyButtons);
