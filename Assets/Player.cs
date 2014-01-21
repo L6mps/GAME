@@ -47,14 +47,14 @@ public class Player : MonoBehaviour {
 		int slot=0;
 		float decrease=  Random.Range(50000000, 100000000);
 		float collisionAngle=-Mathf.Rad2Deg*Mathf.Acos (collision.transform.position.x/collision.transform.position.magnitude);
-		if(collision.transform.position.x<0){
+		if(collision.transform.position.y>0){
 			collisionAngle=-360-collisionAngle;
 		}
-		if(collisionAngle<=0 && collisionAngle>=-36){
+		if(collisionAngle<=0 && collisionAngle>=-18 || collisionAngle>=-360 && collisionAngle<-342){
 			slot=0;
 		}
 		for(int i=1;i<10;i++){
-			if(collisionAngle<-36*i && collisionAngle>=-36*(i+1)){
+			if(collisionAngle<-36*i+18 && collisionAngle>=-36*(i+1)+18){
 				slot=i;
 			}
 		}

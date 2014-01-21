@@ -15,7 +15,7 @@ public class SideHUDLeft : MonoBehaviour {
 	static float[] currentProgress = new float[10];
 	static bool[] isProgressing = new bool[10];
 	static float[] timerDurations = new float[10];
-	private string[] sectorNames = new string[10];
+	public static string[] sectorNames = new string[10];
 	public static bool[] researchState = new bool[20];
 	public static int selectedResearch=-1;
 	private int researchingWeapon=-1;

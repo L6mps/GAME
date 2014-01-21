@@ -211,6 +211,7 @@ MonoBehaviour:
   range: 60
   cooldown: 10
   projectile: {fileID: 100000, guid: 1dcd4efad5fcd3b4c9f52d1415d78b8b, type: 2}
+  cannonType: Mine
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

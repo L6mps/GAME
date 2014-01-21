@@ -20,8 +20,8 @@ public class Spawner : MonoBehaviour {
 	}
 
 	public static void setControlledCannonByID(int i) {
+		currentCannon = i;
 		if(cannons[i]!=null) {
-			currentCannon = i;
 			controlledCannon = cannons[i].name;
 		}
 	}
@@ -81,6 +81,7 @@ public class Spawner : MonoBehaviour {
 						currentCannon = i;
 					}
 					else{
+						currentCannon=i;
 						switch(SlotProperties.selectedWeapon){
 						case(1): {cannonSpawn (i,cannon);
 							break;}

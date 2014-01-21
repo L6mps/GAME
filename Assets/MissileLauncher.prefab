@@ -200,6 +200,7 @@ MonoBehaviour:
   range: 5000
   cooldown: 5
   projectile: {fileID: 100000, guid: 8fc15c3d9f149bc4392609d619add02a, type: 2}
+  cannonType: missile
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -7,6 +7,7 @@ public class CannonControl : MonoBehaviour {
 	public float cooldown=1;
 	private float angle=Mathf.PI/2F;
 	public GameObject projectile;
+	public string cannonType;
 	private float mouseAngle=0;
 	private float maxAngle;
 	private float minAngle;
