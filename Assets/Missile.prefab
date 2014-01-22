@@ -113,7 +113,7 @@ MonoBehaviour:
   speed: 10
   currentSpeed: 0
   angle: 0
-  range: 500
+  range: 1000
   explosion: {fileID: 100000, guid: 44c4e524a9e6e7144918ccf6317e0040, type: 2}
 --- !u!1001 &100100000
 Prefab:

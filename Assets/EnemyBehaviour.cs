@@ -7,6 +7,7 @@ public class EnemyBehaviour : MonoBehaviour {
 	private float speed;
 	public GameObject explosion;
 	public int speedType = 0;
+	private bool isNear = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,14 @@ public class EnemyBehaviour : MonoBehaviour {
 		Player.kamikazeCount++;
 		velocityTowardsPlanet();
 		this.transform.LookAt(new Vector3(0,0,0), Vector3.back);
+	}
+
+	void Update() {
+		if(!isNear)
+			if(transform.position.magnitude < 700) {
+				rigidbody2D.velocity /= 5;
+				isNear = true;
+			}
 	}
 	
 	void velocityTowardsPlanet() {

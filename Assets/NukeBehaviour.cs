@@ -8,7 +8,7 @@ public class NukeBehaviour : MonoBehaviour {
 	public float currentSpeed;
 	public float angle;
 	public GameObject explosion;
-	public static float maxSpeedNuke = -1;
+	public static float maxSpeedNuke = 25;
 	private Vector2 maxVel;
 	private float sin;
 	private float cos;
@@ -22,6 +22,9 @@ public class NukeBehaviour : MonoBehaviour {
 		this.target = target;
 	}
 	void Start () {
+		if(maxSpeedNuke!=25){
+			maxSpeed=maxSpeedNuke;
+		}
 		Physics2D.IgnoreLayerCollision (9, 9, true);
 		angle=(360-transform.rotation.eulerAngles.z)*Mathf.Deg2Rad;
 		Vector2 newVelocity=Vector2.zero;
@@ -63,10 +66,6 @@ public class NukeBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(maxSpeedNuke!=-1){
-			maxSpeed=maxSpeedNuke;
-			maxSpeedNuke=-1;
-		}
 		targetTemp.x = target.x - transform.position.x;
 		targetTemp.y = target.y - transform.position.y;
 		currentSpeed=rigidbody2D.velocity.magnitude;

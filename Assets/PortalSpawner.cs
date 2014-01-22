@@ -6,7 +6,8 @@ public class PortalSpawner : MonoBehaviour {
 	public GameObject portal;
 	public static float minPortalDistance = 1500f;
 	public static float maxPortalDistance = 2000f;
-	public static float portalSpawnRate = 45f;
+	public static float portalSpawnRate = 60f;
+	int portalCount = 1;
 
 	void Start() {
 		Invoke ("SpawnPortal", 5);
@@ -24,12 +25,14 @@ public class PortalSpawner : MonoBehaviour {
 	}
 
 	void SpawnPortal() {
-		Vector2 randomPos = new Vector2(0,0);
-		while(Mathf.Sqrt(randomPos.x*randomPos.x + randomPos.y*randomPos.y)<minPortalDistance)
-			randomPos = Random.insideUnitCircle * maxPortalDistance;
-		Vector3 newPos = new Vector3(randomPos.x, randomPos.y, 0);
-		Instantiate (portal, newPos, new Quaternion(0,0,0,0));
-		Player.portalCount++;
-		portalSpawnRate *= 0.92f;
+		for(int i=0; i<portalCount; i++) {
+			Vector2 randomPos = new Vector2(0,0);
+			while(Mathf.Sqrt(randomPos.x*randomPos.x + randomPos.y*randomPos.y)<minPortalDistance)
+				randomPos = Random.insideUnitCircle * maxPortalDistance;
+			Vector3 newPos = new Vector3(randomPos.x, randomPos.y, 0);
+			Instantiate (portal, newPos, new Quaternion(0,0,0,0));
+			Player.portalCount++;
+		}
+		portalCount++;
 	}
 }

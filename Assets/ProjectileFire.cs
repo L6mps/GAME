@@ -8,14 +8,25 @@ public class ProjectileFire : MonoBehaviour {
 	public float currentSpeed;
 	public float angle;
 	public float range;
-	public static float rangeMissile = -1;
-	public static float speedCannon= -1;
+	public static float rangeMissile = 1000;
+	public static float speedCannon= 50;
 	public GameObject explosion;
 	Vector2 maxVel;
 	float sin;
 	float cos;
 	// Use this for initialization
 	void Start () {
+		if(transform.name=="Missile(Clone)"){
+			if(rangeMissile!=1000){
+				range=rangeMissile;
+			}
+		}
+		else if(transform.name==("Cube(Clone)")){
+			if(speedCannon!=50){
+				maxSpeed=speedCannon;
+				speed=speedCannon;
+			}
+		}
 		Physics2D.IgnoreLayerCollision (9, 9, true);
 		angle=(360-transform.rotation.eulerAngles.z)*Mathf.Deg2Rad;
 		Vector2 newVelocity=Vector2.zero;
@@ -30,19 +41,6 @@ public class ProjectileFire : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(transform.name=="Missile(Clone)"){
-			if(rangeMissile!=-1){
-				range=rangeMissile;
-				rangeMissile=-1;
-			}
-		}
-		else if(transform.name=="Mine(Clone"){
-			if(speedCannon!=-1){
-				maxSpeed=speedCannon;
-				speed=speedCannon;
-				speedCannon=-1;
-			}
-		}
 		currentSpeed=rigidbody2D.velocity.x/sin;
 		if (rigidbody2D.velocity != maxVel) {
 			if(Mathf.Abs(rigidbody2D.velocity.x)<Mathf.Abs (maxVel.x)){

@@ -8,7 +8,7 @@ public class MineBehaviour : MonoBehaviour {
 	public float currentSpeed;
 	public float angle;
 	public float range;
-	public static float speedMine = -1;
+	public static float speedMine = 50;
 	private float target=float.MaxValue;
 	private float stepX;
 	private float stepY;
@@ -21,6 +21,10 @@ public class MineBehaviour : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
+		if(speedMine!=50){
+			speed=speedMine;
+			maxSpeed=speedMine;
+		}
 		Physics2D.IgnoreLayerCollision (10, 8, true);
 		Physics2D.IgnoreLayerCollision (10, 9, true);
 		Physics2D.IgnoreLayerCollision (10, 10, true);
@@ -37,11 +41,6 @@ public class MineBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(speedMine!=-1){
-			speed=speedMine;
-			maxSpeed=speedMine;
-			speedMine=-1;
-		}
 		currentSpeed=rigidbody2D.velocity.x/sin;
 		if (rigidbody2D.velocity != maxVel) {
 			if(Mathf.Abs(rigidbody2D.velocity.x)<Mathf.Abs (maxVel.x)){

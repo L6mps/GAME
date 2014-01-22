@@ -86,7 +86,7 @@ public class SideHUDLeft : MonoBehaviour {
 					break;
 				}
 				case 9:{
-					ProjectileFire.rangeMissile=1000;
+					ProjectileFire.rangeMissile=1500;
 					break;
 				}
 				case 10:{

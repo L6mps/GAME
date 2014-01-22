@@ -47,37 +47,31 @@ public class CannonControl : MonoBehaviour {
 		case "cannon":
 			if(cooldownCannon!=-1){
 				cooldown=cooldownCannon;
-				cooldownCannon=-1;
 			}
 			if(angleCannon!=-1){
 				angleRange=angleCannon;
 				maxAngle=objectAngle+angleRange;
 				minAngle=objectAngle-angleRange;
-				angleCannon=-1;
 			}
 			break;
 		case "missile":
 			if(cooldownMissile!=-1){
 				cooldown=cooldownMissile;
-				cooldownMissile=-1;
 			}
 			if(angleMissile!=-1){
 				angleRange=angleMissile;
 				maxAngle=objectAngle+angleRange;
 				minAngle=objectAngle-angleRange;
-				angleMissile=-1;
 			}
 			break;
 		case "mine":
 			if(cooldownMine!=-1){
 				cooldown=cooldownMine;
-				cooldownMine=-1;
 			}
 			if(angleMine!=-1){
 				angleRange=angleMine;
 				maxAngle=objectAngle+angleRange;
 				minAngle=objectAngle-angleRange;
-				angleMine=-1;
 			}
 			break;
 		}

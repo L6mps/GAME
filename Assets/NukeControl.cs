@@ -45,7 +45,6 @@ public class NukeControl : MonoBehaviour {
 	void Update () {
 		if(cooldownNuke!=-1){
 			cooldown=cooldownNuke;
-			cooldownNuke=-1;
 		}
 		if(reload!=cooldown){
 			float percent=reload/cooldown;
