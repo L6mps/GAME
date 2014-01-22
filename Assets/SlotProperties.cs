@@ -17,6 +17,8 @@ public class SlotProperties : MonoBehaviour {
 	public Texture missileI;
 	public Texture mineI;
 	public Texture nukeI;
+	public Texture alus;
+	public Texture building;
 	public GUIStyle progressBarBack;
 	public GUIStyle progressBarFront;
 	public GUIStyle labelStyle;
@@ -98,6 +100,15 @@ public class SlotProperties : MonoBehaviour {
 				}
 				GUI.Box (new Rect(xLen/8, 6*labelSize+picSize, (int)(SideHUDLeft.currentProgress[currentCannon]*((float)6*xLen/8)), labelSize), "", progressBarBack);
 				GUI.Box (new Rect(xLen/8, 6*labelSize+picSize, 6*xLen/8, labelSize), SideHUDLeft.currentProgress[currentCannon]==1f?"Ready!":"Loading", progressBarFront);
+			}
+			else if(Spawner.isBuilding[currentCannon]!=0){
+				GUI.Label(new Rect(0,6*labelSize,picSize,picSize), building);
+				GUI.Box (new Rect(xLen/8, 6*labelSize+picSize, (int)(Spawner.buildProgress[currentCannon]*((float)6*xLen/8)), labelSize), "", progressBarBack);
+				GUI.Box (new Rect(xLen/8, 6*labelSize+picSize, 6*xLen/8, labelSize), "Building", progressBarFront);
+				
+			}
+			else{
+				GUI.Label(new Rect(0,6*labelSize,xLen,xLen), alus);
 			}
 		}
 		else{

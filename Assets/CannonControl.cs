@@ -47,42 +47,44 @@ public class CannonControl : MonoBehaviour {
 			Vector3 objectPos=transform.position;
 			Vector3 mouse= Input.mousePosition;
 			Vector3 mousePos=Camera.main.ScreenToWorldPoint (mouse);
-			float mouseRadius=Mathf.Sqrt (Mathf.Pow (mousePos.x-objectPos.x,2)+Mathf.Pow (mousePos.y-objectPos.y,2));
-			if(mouseRadius!=0 && mousePos.y-objectPos.y<0){
-				mouseAngle=-(Mathf.Asin((mousePos.x-objectPos.x)/mouseRadius)+Mathf.PI);
-			}
-			else if(mouseRadius!=0 && mousePos.y-objectPos.y>=0){
-				mouseAngle=Mathf.Asin((mousePos.x-objectPos.x)/mouseRadius);
-			}
-			mouseAngle=Mathf.Rad2Deg*mouseAngle;
-			if(maxAngle>90){
-				if (mouseAngle < maxAngle-360 && mouseAngle+360> minAngle || mouseAngle < maxAngle && mouseAngle> minAngle) {
-					transform.Rotate (0, 0, angle - mouseAngle);
-					angle = mouseAngle;
+			if(mouse.x>Screen.width/8 && mouse.x<7*Screen.width/8){
+				float mouseRadius=Mathf.Sqrt (Mathf.Pow (mousePos.x-objectPos.x,2)+Mathf.Pow (mousePos.y-objectPos.y,2));
+				if(mouseRadius!=0 && mousePos.y-objectPos.y<0){
+					mouseAngle=-(Mathf.Asin((mousePos.x-objectPos.x)/mouseRadius)+Mathf.PI);
 				}
-			}
-			else if(minAngle<-270){
-				if(mouseAngle-360<maxAngle && mouseAngle>minAngle+360 || mouseAngle<maxAngle && mouseAngle>minAngle){
+				else if(mouseRadius!=0 && mousePos.y-objectPos.y>=0){
+					mouseAngle=Mathf.Asin((mousePos.x-objectPos.x)/mouseRadius);
+				}
+				mouseAngle=Mathf.Rad2Deg*mouseAngle;
+				if(maxAngle>90){
+					if (mouseAngle < maxAngle-360 && mouseAngle+360> minAngle || mouseAngle < maxAngle && mouseAngle> minAngle) {
+						transform.Rotate (0, 0, angle - mouseAngle);
+						angle = mouseAngle;
+					}
+				}
+				else if(minAngle<-270){
+					if(mouseAngle-360<maxAngle && mouseAngle>minAngle+360 || mouseAngle<maxAngle && mouseAngle>minAngle){
+						transform.Rotate(0,0,angle-mouseAngle);
+						angle=mouseAngle;
+					}
+				}
+				else if(mouseAngle<maxAngle && mouseAngle>minAngle){
 					transform.Rotate(0,0,angle-mouseAngle);
 					angle=mouseAngle;
 				}
-			}
-			else if(mouseAngle<maxAngle && mouseAngle>minAngle){
-				transform.Rotate(0,0,angle-mouseAngle);
-				angle=mouseAngle;
-			}
-			if(angle>=360)
-				angle-=360;
-			if(angle<=-360)
-				angle+=360;
-			if(Input.GetMouseButtonDown (0) && reload==cooldown){
-				GameObject temp=((GameObject)Instantiate(projectile,transform.position,transform.rotation));
-				if(temp.name=="Mine(Clone)"){
-					mousePos.z=0;
-					temp.GetComponent<MineBehaviour>().setTarget(mousePos.magnitude);
+				if(angle>=360)
+					angle-=360;
+				if(angle<=-360)
+					angle+=360;
+				if(Input.GetMouseButtonDown (0) && !Input.GetKey ("left ctrl") && reload==cooldown){
+					GameObject temp=((GameObject)Instantiate(projectile,transform.position,transform.rotation));
+					if(temp.name=="Mine(Clone)"){
+						mousePos.z=0;
+						temp.GetComponent<MineBehaviour>().setTarget(mousePos.magnitude);
+					}
+					reload=0;
+					SideHUDLeft.moveProgressBar(Spawner.getControlledCannonByID(),cooldown);
 				}
-				reload=0;
-				SideHUDLeft.moveProgressBar(Spawner.getControlledCannonByID(),cooldown);
 			}
 		}
 		else if(angle!=objectAngle){

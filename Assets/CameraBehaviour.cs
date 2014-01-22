@@ -160,6 +160,7 @@ public class CameraBehaviour : MonoBehaviour {
 	}
 	
 	public void moveToSelectedCannon(int slot) {
+		Spawner.setControlledCannonByID (slot);
 		if(!moving) {
 			Vector3 newPos = Spawner.getSlotPos(slot);
 			newPos.z = -1000;

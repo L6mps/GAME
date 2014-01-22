@@ -127,6 +127,9 @@ public class SideHUDLeft : MonoBehaviour {
 		if(selectedResearch!=-1){
 			researchSelection(selectedResearch);
 		}
+		else{
+			GUI.Box (new Rect(boxWidth,26*boxHeight,boxWidth,6*boxHeight),"",researchButtons);
+		}
 	}
 	void researchSelection(int r){
 		int boxWidth = Screen.width/16;

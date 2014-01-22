@@ -8,17 +8,31 @@ public class PortalBehaviour : MonoBehaviour {
 	public static float offset = 100f;
 	private float speed;
 	private float direction;
+	private float state=0;
+	private int dir=1;
+	private Vector3 startScale;
 	
 	void Start () {
+		startScale = transform.localScale;
 		Physics2D.IgnoreLayerCollision (8, 8, true);
-		this.transform.LookAt(new Vector3(0,0,0), Vector3.back);
+		transform.rotation =Quaternion.LookRotation (Vector3.forward,new Vector3(transform.position.x,transform.position.y,0));
 		direction = (Random.value < 0.5)?(1f):(-1f);
 		speed = (float) Random.Range(1,4);
 		Invoke ("SpawnMothership", 3);
 	}
 
 	void Update () {
-		this.transform.LookAt(new Vector3(0,0,0), Vector3.back);
+		state += dir*Time.deltaTime;
+		if (state >= 3){
+			dir = -1;
+			state=3;
+		}
+		else if(state<=1){
+			dir=1;
+			state=1;
+		}
+		transform.localScale=startScale/state;
+		transform.rotation =Quaternion.LookRotation (Vector3.forward,new Vector3(transform.position.x,transform.position.y,0));
 		if(!IsInvoking())
 			Invoke ("SpawnMothership", mothershipSpawnDelay);
 		transform.position=Quaternion.Euler (0,0,direction*Time.deltaTime*speed)*transform.position;

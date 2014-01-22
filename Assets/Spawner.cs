@@ -7,9 +7,13 @@ public class Spawner : MonoBehaviour {
 	public GameObject missile;
 	public GameObject nuke;
 	public GameObject mine;
+	public Sprite alus;
+	public Sprite building;
 	static GameObject[] slots =new GameObject[10];
 	public static GameObject[] cannons= new GameObject[10];
 	static int currentCannon = -1;
+	public static int[] isBuilding=new int[10];
+	public static float[] buildProgress = new float[10];
 	public static string controlledCannon;
 	public static string getControlledCannon(){
 				return controlledCannon;
@@ -39,6 +43,8 @@ public class Spawner : MonoBehaviour {
 		Transform tran =transform;
 		tran.Rotate (0,0,-90);
 		for(int i=0;i<10;i++){
+			buildProgress[i]=1;
+			isBuilding[i]=0;
 			slots[i]=(GameObject)Instantiate (slot,newPosition,tran.rotation);
           slots[i].transform.position=newPosition;
           slots[i].transform.rotation=tran.rotation;
@@ -54,6 +60,9 @@ public class Spawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(currentCannon!=-1){
+			controlledCannon=cannons[currentCannon]!=null?cannons[currentCannon].name:"";
+		}
 		if (Input.GetMouseButtonUp (0) && Input.GetKey ("left ctrl")) {
 			Vector3 newPosition = Vector3.zero;
 			Vector3 mouse = Input.mousePosition;
@@ -67,15 +76,20 @@ public class Spawner : MonoBehaviour {
 						if(controlledCannon==cannons[i].name){
 							Destroy (cannons[i]);
 							switch(SlotProperties.selectedWeapon){
-							case(1): {cannonSpawn (i,cannon);
+							case(1): {isBuilding[i]=1;
+								buildProgress[i]=0;
 								break;}
-							case(2): {cannonSpawn (i,missile);
+							case(2): {isBuilding[i]=2;
+								buildProgress[i]=0;
 								break;}
-							case(3): {cannonSpawn (i,nuke);
+							case(3): {isBuilding[i]=3;
+								buildProgress[i]=0;
 								break;}
-							case(4): {cannonSpawn (i,mine);
+							case(4): {isBuilding[i]=4;
+								buildProgress[i]=0;
 								break;}
 							}
+							slots[i].GetComponentInChildren<SpriteRenderer>().sprite=building;
 						}
 						controlledCannon = cannons [i].name;
 						currentCannon = i;
@@ -83,20 +97,47 @@ public class Spawner : MonoBehaviour {
 					else{
 						currentCannon=i;
 						switch(SlotProperties.selectedWeapon){
-						case(1): {cannonSpawn (i,cannon);
+						case(1): {isBuilding[i]=1;
+							buildProgress[i]=0;
 							break;}
-						case(2): {cannonSpawn (i,missile);
+						case(2): {isBuilding[i]=2;
+							buildProgress[i]=0;
 							break;}
-						case(3): {cannonSpawn (i,nuke);
+						case(3): {isBuilding[i]=3;
+							buildProgress[i]=0;
 							break;}
-						case(4): {cannonSpawn (i,mine);
+						case(4): {isBuilding[i]=4;
+							buildProgress[i]=0;
 							break;}
 						}
+						slots[i].GetComponentInChildren<SpriteRenderer>().sprite=building;
 					}
 					
 				}
 			}
 		}
+		for(int i=0;i<10;i++){
+			if(isBuilding[i]!=0){
+				buildProgress[i]+=Time.deltaTime/5;
+				if(buildProgress[i]>=1)
+					buildProgress[i]=1;
+			}
+			if(buildProgress[i]==1){
+				switch(isBuilding[i]){
+				case(1): {cannonSpawn (i,cannon);
+					break;}
+				case(2): {cannonSpawn (i,missile);
+					break;}
+				case(3): {cannonSpawn (i,nuke);
+					break;}
+				case(4): {cannonSpawn (i,mine);
+					break;}
+				}
+				isBuilding[i]=0;
+				slots[i].GetComponentInChildren<SpriteRenderer>().sprite=alus;
+			}
+		}
+
 		
 	}
 	void cannonSpawn(int i,GameObject launcher){
