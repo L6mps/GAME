@@ -1357,6 +1357,8 @@ MonoBehaviour:
   missileI: {fileID: 2800000, guid: 31a1a6de14b15fe4bba53b27918f1b8f, type: 3}
   mineI: {fileID: 2800000, guid: 65332ac564ab9274984059844a066e6d, type: 3}
   nukeI: {fileID: 2800000, guid: 1677339e12325fc468330b5183b25c73, type: 3}
+  alus: {fileID: 2800000, guid: 2830dd5a6227dd3448dc9f4a26d1108c, type: 3}
+  building: {fileID: 2800000, guid: e2c4105cedd86204fada688950691dbc, type: 3}
   progressBarBack:
     m_Name: 
     m_Normal:
@@ -1703,7 +1705,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 824008713}
   m_GameObject: {fileID: 1481032240}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7ee5e1453daa7d449d2c3967d2aade2, type: 3}
   m_Name: 
@@ -1794,6 +1796,8 @@ MonoBehaviour:
   missile: {fileID: 100000, guid: 34a567106c58afa4daf48c3d01bdaecc, type: 2}
   nuke: {fileID: 100006, guid: fc817350f03de8b438e47bdaaac3410f, type: 2}
   mine: {fileID: 100000, guid: 5d4d130cac8ac1c45a6c5b1105e8ab4f, type: 2}
+  alus: {fileID: 21300000, guid: 43b43cf0e82429243b92c8f10d6b90d7, type: 3}
+  building: {fileID: 21300000, guid: e2c4105cedd86204fada688950691dbc, type: 3}
 --- !u!114 &1481032248
 MonoBehaviour:
   m_ObjectHideFlags: 0

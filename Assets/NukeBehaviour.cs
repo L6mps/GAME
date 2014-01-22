@@ -15,6 +15,7 @@ public class NukeBehaviour : MonoBehaviour {
 	private Vector2 targetTemp;
 	private Vector2 checkVel;
 	private int direction=1;
+	private float radius=0;
 	// Use this for initialization
 	public void setTarget(Vector2 target){
 		this.target = target;
@@ -30,19 +31,19 @@ public class NukeBehaviour : MonoBehaviour {
 		float targetAngle=Mathf.Asin (target.y/target.magnitude);
 		if(target.x<0){
 			if(target.y<0){
-				targetAngle-=Mathf.PI/2;
+				targetAngle=-Mathf.PI-targetAngle;
 			}
 			else{
-				targetAngle+=Mathf.PI/2;
+				targetAngle=Mathf.PI-targetAngle;
 			}
 		}
 		float objectAngle=Mathf.Asin (transform.position.y/(new Vector2(transform.position.x,transform.position.y)).magnitude);
 		if(transform.position.x<0){
 			if(transform.position.y<0){
-				objectAngle-=Mathf.PI/2;
+				objectAngle=-Mathf.PI-objectAngle;
 			}
 			else{
-				objectAngle+=Mathf.PI/2;
+				objectAngle=Mathf.PI-objectAngle;
 			}
 		}
 		if(Mathf.Abs (objectAngle-targetAngle)<Mathf.PI){
@@ -74,12 +75,13 @@ public class NukeBehaviour : MonoBehaviour {
 			else{
 				rigidbody2D.velocity=maxVel;
 				checkVel=maxVel;
+				radius=(new Vector2(transform.position.x-target.x,transform.position.y-target.y)).magnitude/2;
 			}
 		}
 		else if(targetTemp.x/targetTemp.magnitude!=rigidbody2D.velocity.x/rigidbody2D.velocity.magnitude){
-			if(Mathf.Abs (targetTemp.x/targetTemp.y-rigidbody2D.velocity.x/rigidbody2D.velocity.y)>1f || targetTemp.x/rigidbody2D.velocity.x<0 || targetTemp.y/rigidbody2D.velocity.y<0){
+			if(Mathf.Abs (targetTemp.x/targetTemp.y-rigidbody2D.velocity.x/rigidbody2D.velocity.y)>0.5f || targetTemp.x/rigidbody2D.velocity.x<0 || targetTemp.y/rigidbody2D.velocity.y<0){
 				Vector2 oldVel=rigidbody2D.velocity;
-				Vector2 force=new Vector2(oldVel.x*oldVel.x/200,oldVel.y*oldVel.y/200);
+				Vector2 force=new Vector2(oldVel.x*oldVel.x/radius,oldVel.y*oldVel.y/radius);
 				if(oldVel.x<0){
 					force.x=-force.x;
 					if(oldVel.y<0){
