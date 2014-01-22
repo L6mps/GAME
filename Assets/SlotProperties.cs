@@ -19,6 +19,7 @@ public class SlotProperties : MonoBehaviour {
 	public Texture nukeI;
 	public GUIStyle progressBarBack;
 	public GUIStyle progressBarFront;
+	public GUIStyle labelStyle;
 	public static int selectedWeapon=0;
 	int currentCannon;
 	// Use this for initialization
@@ -33,6 +34,8 @@ public class SlotProperties : MonoBehaviour {
 		nukeselected.fontSize = Screen.height / 50;
 		mineselected.fontSize = Screen.height / 50;
 		slot.fontSize = Screen.height / 50;
+		labelStyle.fontSize=Screen.height/50;
+		progressBarFront.fontSize=Screen.height/50;
 	}
 	void Update(){
 				currentCannon = Spawner.getControlledCannonByID ();
@@ -45,20 +48,20 @@ public class SlotProperties : MonoBehaviour {
 			if(SideHUDLeft.researchState[0])
 				selectedWeapon = 1;
 		}
-		if(GUI.Button (new Rect (0,yStep*1, xLen, yStep), "MissileLauncher", selectedWeapon==2?missileselected:missile)) {
+		if(GUI.Button (new Rect (0,yStep*1, xLen, yStep), "Missile", selectedWeapon==2?missileselected:missile)) {
 			if(SideHUDLeft.researchState[1])
 				selectedWeapon = 2;
 		}
-		if(GUI.Button (new Rect (0,yStep*2, xLen, yStep), "NukeLauncher", selectedWeapon==3?nukeselected:nuke)) {
+		if(GUI.Button (new Rect (0,yStep*2, xLen, yStep), "Nuke", selectedWeapon==3?nukeselected:nuke)) {
 			if(SideHUDLeft.researchState[2])
 				selectedWeapon = 3;
 		}
-		if(GUI.Button (new Rect (0,yStep*3, xLen, yStep), "MineLauncher", selectedWeapon==4?mineselected:mine)) {
+		if(GUI.Button (new Rect (0,yStep*3, xLen, yStep), "Mine", selectedWeapon==4?mineselected:mine)) {
 			if(SideHUDLeft.researchState[3])
 				selectedWeapon = 4;
 		}
 		GUI.Box (new Rect(0,yStep*4,xLen,Screen.height-xLen-4*yStep)," Sector information", slot);
-		int labelSize = Screen.height / 40;
+		int labelSize = Screen.height /40;
 		GUI.BeginGroup(new Rect(0,yStep*4+labelSize,xLen,Screen.height-xLen-4*yStep-labelSize));
 		bool cannon;
 		if(currentCannon<10 &&currentCannon>=0){
@@ -67,42 +70,43 @@ public class SlotProperties : MonoBehaviour {
 					else
 							cannon = false;
 			string[] info = getCannonInfo ();
-			GUI.Label (new Rect (0, 0, xLen, labelSize)," "+SideHUDLeft.sectorNames[currentCannon]);
-			GUI.Label (new Rect (0, labelSize, xLen, labelSize)," Type: "+(cannon?info[0]:" n/a"));
-			GUI.Label (new Rect (0, 2*labelSize, xLen, labelSize)," Military: "+(cannon?""+Player.slotPopulation[currentCannon]:"n/a"));
-			GUI.Label (new Rect (0, 3*labelSize, xLen, labelSize)," Speed: "+(cannon?info[1]:"n/a"));
-			GUI.Label (new Rect (0, 4*labelSize, xLen, labelSize)," Range: "+(cannon?info[2]:"n/a"));
-			GUI.Label (new Rect (0, 5*labelSize, xLen, labelSize)," Angle: "+(cannon?info[3]:"n/a"));
+			GUI.Label (new Rect (0, 0, xLen, labelSize)," "+SideHUDLeft.sectorNames[currentCannon],labelStyle);
+			GUI.Label (new Rect (0, labelSize, xLen, labelSize)," Type: "+(cannon?info[0]:" n/a"),labelStyle);
+			GUI.Label (new Rect (0, 2*labelSize, xLen, labelSize)," Military: "+(cannon?""+Player.slotPopulation[currentCannon]:"n/a"),labelStyle);
+			GUI.Label (new Rect (0, 3*labelSize, xLen, labelSize)," Speed: "+(cannon?info[1]:"n/a"),labelStyle);
+			GUI.Label (new Rect (0, 4*labelSize, xLen, labelSize)," Range: "+(cannon?info[2]:"n/a"),labelStyle);
+			GUI.Label (new Rect (0, 5*labelSize, xLen, labelSize)," Angle: "+(cannon?info[3]:"n/a"),labelStyle);
+			int picSize=Screen.height-xLen-4*yStep-9*labelSize<xLen?Screen.height-xLen-4*yStep-9*labelSize:xLen;
 			if(cannon){
 				switch (info[0]){
 				case "cannon":{
-					GUI.Label(new Rect(0,6*labelSize,xLen,xLen), cannonI);
+					GUI.Label(new Rect(0,6*labelSize,picSize,picSize), cannonI);
 					break;
 				}
 				case "missile":{
-					GUI.Label(new Rect(0,6*labelSize,xLen,xLen), missileI);
+					GUI.Label(new Rect(0,6*labelSize,picSize,picSize), missileI);
 					break;
 				}
 				case "nuke":{
-					GUI.Label(new Rect(0,6*labelSize,xLen,xLen), nukeI);
+					GUI.Label(new Rect(0,6*labelSize,picSize,picSize), nukeI);
 					break;
 				}
 				case "mine":{
-					GUI.Label(new Rect(0,6*labelSize,xLen,xLen), mineI);
+					GUI.Label(new Rect(0,6*labelSize,picSize,picSize), mineI);
 					break;
 				}
 				}
-				GUI.Box (new Rect(xLen/8, 6*labelSize+xLen, (int)(SideHUDLeft.currentProgress[currentCannon]*((float)6*xLen/8)), 2*labelSize), "", progressBarBack);
-				GUI.Box (new Rect(xLen/8, 6*labelSize+xLen, 6*xLen/8, 2*labelSize), SideHUDLeft.currentProgress[currentCannon]==1f?"Ready!":"Loading", progressBarFront);
+				GUI.Box (new Rect(xLen/8, 6*labelSize+picSize, (int)(SideHUDLeft.currentProgress[currentCannon]*((float)6*xLen/8)), labelSize), "", progressBarBack);
+				GUI.Box (new Rect(xLen/8, 6*labelSize+picSize, 6*xLen/8, labelSize), SideHUDLeft.currentProgress[currentCannon]==1f?"Ready!":"Loading", progressBarFront);
 			}
 		}
 		else{
-			GUI.Label (new Rect (0, 0, xLen, labelSize)," Not selected");
-			GUI.Label (new Rect (0, labelSize, xLen, labelSize)," Type: n/a");
-			GUI.Label (new Rect (0, 2*labelSize, xLen, labelSize)," Military: n/a");
-			GUI.Label (new Rect (0, 3*labelSize, xLen, labelSize)," Speed: n/a");
-			GUI.Label (new Rect (0, 4*labelSize, xLen, labelSize)," Range: n/a");
-			GUI.Label (new Rect (0, 5*labelSize, xLen, labelSize)," Angle: n/a");
+			GUI.Label (new Rect (0, 0, xLen, labelSize)," Not selected",labelStyle);
+			GUI.Label (new Rect (0, labelSize, xLen, labelSize)," Type: n/a",labelStyle);
+			GUI.Label (new Rect (0, 2*labelSize, xLen, labelSize)," Military: n/a",labelStyle);
+			GUI.Label (new Rect (0, 3*labelSize, xLen, labelSize)," Speed: n/a",labelStyle);
+			GUI.Label (new Rect (0, 4*labelSize, xLen, labelSize)," Range: n/a",labelStyle);
+			GUI.Label (new Rect (0, 5*labelSize, xLen, labelSize)," Angle: n/a",labelStyle);
 		}
 		GUI.EndGroup ();
 		GUI.EndGroup();

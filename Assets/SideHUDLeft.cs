@@ -100,11 +100,11 @@ public class SideHUDLeft : MonoBehaviour {
 			GUI.Box (new Rect(boxWidth*2-2, (2*i+2)*boxHeight+2, (float) -(8f-(float)Player.slotPopulation[i]/25000000)*boxWidth*0.25f+4, boxHeight-4),"", black);
 		}
 		GUI.Box (new Rect(0,21*boxHeight,boxWidth*2, boxHeight), "Enemies", enemyButtons);
-		GUI.Box (new Rect(0,22*boxHeight,boxWidth, boxHeight), "Portals", enemyButtons);
+		GUI.Box (new Rect(0,22*boxHeight,boxWidth, boxHeight), "Papas", enemyButtons);
 		GUI.Box (new Rect(0+boxWidth,22*boxHeight,boxWidth, boxHeight), Player.portalCount.ToString(), enemyButtons);
-		GUI.Box (new Rect(0,23*boxHeight,boxWidth, boxHeight), "Motherships", enemyButtons);
+		GUI.Box (new Rect(0,23*boxHeight,boxWidth, boxHeight), "Mikes", enemyButtons);
 		GUI.Box (new Rect(0+boxWidth,23*boxHeight,boxWidth, boxHeight), Player.mothershipCount.ToString(), enemyButtons);
-		GUI.Box (new Rect(0,24*boxHeight,boxWidth, boxHeight), "Kamikazes", enemyButtons);
+		GUI.Box (new Rect(0,24*boxHeight,boxWidth, boxHeight), "Kilos", enemyButtons);
 		GUI.Box (new Rect(0+boxWidth,24*boxHeight,boxWidth, boxHeight), Player.kamikazeCount.ToString(), enemyButtons);
 		GUI.Box (new Rect(0,25*boxHeight,boxWidth*2, boxHeight), "Research", researchButtons);
 		for(int i=0;i<4;i++){

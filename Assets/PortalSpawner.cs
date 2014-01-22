@@ -15,7 +15,7 @@ public class PortalSpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () { 
 		if(!IsInvoking())
-			Invoke ("SpawnPortal", Mathf.Round (portalSpawnRate));
+			Invoke ("SpawnPortal", portalSpawnRate>1?Mathf.Round (portalSpawnRate):1);
 
 		//debug code, press a to spawn a portal
 		if(Input.GetKeyUp ("a")) {
