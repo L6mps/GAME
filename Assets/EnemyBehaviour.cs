@@ -16,6 +16,7 @@ public class EnemyBehaviour : MonoBehaviour {
 		else
 			speed = slowSpeed;
 		Physics2D.IgnoreLayerCollision (8, 8, true);
+		Physics2D.IgnoreLayerCollision (8, 10, true);
 		Player.kamikazeCount++;
 		velocityTowardsPlanet();
 		this.transform.LookAt(new Vector3(0,0,0), Vector3.back);
@@ -30,6 +31,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision){
 		Physics2D.IgnoreLayerCollision (8, 8, true);
+		Physics2D.IgnoreLayerCollision (8, 10, true);
 		Instantiate (explosion,transform.position,transform.rotation);
 		Destroy (gameObject);
 		Player.kamikazeCount--;

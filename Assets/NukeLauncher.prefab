@@ -151,9 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e11465a5be16c408308eb7271130fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angleRange: 0
+  angleRange: 90
   range: 500
-  cooldown: 15
+  cooldown: 20
   projectile: {fileID: 100000, guid: 9350ddca44b10c24e85c220c4689c8aa, type: 2}
   cannonType: nuke
   motion1: {fileID: 21300000, guid: 01f36dada81a57648bbf6d68ebde4534, type: 3}

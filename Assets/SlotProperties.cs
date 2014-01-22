@@ -75,8 +75,8 @@ public class SlotProperties : MonoBehaviour {
 			GUI.Label (new Rect (0, 0, xLen, labelSize)," "+SideHUDLeft.sectorNames[currentCannon],labelStyle);
 			GUI.Label (new Rect (0, labelSize, xLen, labelSize)," Type: "+(cannon?info[0]:" n/a"),labelStyle);
 			GUI.Label (new Rect (0, 2*labelSize, xLen, labelSize)," Military: "+(cannon?""+Player.slotPopulation[currentCannon]:"n/a"),labelStyle);
-			GUI.Label (new Rect (0, 3*labelSize, xLen, labelSize)," Speed: "+(cannon?info[1]:"n/a"),labelStyle);
-			GUI.Label (new Rect (0, 4*labelSize, xLen, labelSize)," Range: "+(cannon?info[2]:"n/a"),labelStyle);
+			GUI.Label (new Rect (0, 3*labelSize, xLen, labelSize)," Reload: "+(cannon?info[1]:"n/a"),labelStyle);
+			GUI.Label (new Rect (0, 4*labelSize, xLen, labelSize),(info[0].Equals("missile")?" Range: ":" Speed: ")+(cannon?info[2]:"n/a"),labelStyle);
 			GUI.Label (new Rect (0, 5*labelSize, xLen, labelSize)," Angle: "+(cannon?info[3]:"n/a"),labelStyle);
 			int picSize=Screen.height-xLen-4*yStep-9*labelSize<xLen?Screen.height-xLen-4*yStep-9*labelSize:xLen;
 			if(cannon){
@@ -115,8 +115,8 @@ public class SlotProperties : MonoBehaviour {
 			GUI.Label (new Rect (0, 0, xLen, labelSize)," Not selected",labelStyle);
 			GUI.Label (new Rect (0, labelSize, xLen, labelSize)," Type: n/a",labelStyle);
 			GUI.Label (new Rect (0, 2*labelSize, xLen, labelSize)," Military: n/a",labelStyle);
-			GUI.Label (new Rect (0, 3*labelSize, xLen, labelSize)," Speed: n/a",labelStyle);
-			GUI.Label (new Rect (0, 4*labelSize, xLen, labelSize)," Range: n/a",labelStyle);
+			GUI.Label (new Rect (0, 3*labelSize, xLen, labelSize)," Reload: n/a",labelStyle);
+			GUI.Label (new Rect (0, 4*labelSize, xLen, labelSize)," Speed: n/a",labelStyle);
 			GUI.Label (new Rect (0, 5*labelSize, xLen, labelSize)," Angle: n/a",labelStyle);
 		}
 		GUI.EndGroup ();
@@ -130,25 +130,25 @@ public class SlotProperties : MonoBehaviour {
 			if(Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>()!=null){
 				info[0]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().cannonType;
 				if(info[0].Equals("cannon")){
-					info[1]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().projectile.GetComponent<ProjectileFire>().maxSpeed.ToString();
-					info[2]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().projectile.GetComponent<ProjectileFire>().range.ToString();
+					info[1]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().cooldown.ToString();
+					info[2]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().projectile.GetComponent<ProjectileFire>().maxSpeed.ToString();
 					info[3]=(Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().angleRange*2).ToString();
 				}
 				else if(info[0].Equals ("missile")){
-					info[1]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().projectile.GetComponent<ProjectileFire>().maxSpeed.ToString();
+					info[1]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().cooldown.ToString();
 					info[2]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().projectile.GetComponent<ProjectileFire>().range.ToString();
 					info[3]=(Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().angleRange*2).ToString();
 				}
 				else if(info[0].Equals ("mine")){
-					info[1]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().projectile.GetComponent<MineBehaviour>().maxSpeed.ToString();
-					info[2]="infinite";
+					info[1]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().cooldown.ToString();
+					info[2]=Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().projectile.GetComponent<MineBehaviour>().maxSpeed.ToString();
 					info[3]=(Spawner.cannons[currentCannon].GetComponentInChildren<CannonControl>().angleRange*2).ToString();
 				}
 			}
 			else if(Spawner.cannons[currentCannon].GetComponentInChildren<NukeControl>()!=null){
 				info[0]=Spawner.cannons[currentCannon].GetComponentInChildren<NukeControl>().cannonType;
-				info[1]=Spawner.cannons[currentCannon].GetComponentInChildren<NukeControl>().projectile.GetComponent<NukeBehaviour>().maxSpeed.ToString();
-				info[2]="infinite";
+				info[1]=Spawner.cannons[currentCannon].GetComponentInChildren<NukeControl>().cooldown.ToString();
+				info[2]=Spawner.cannons[currentCannon].GetComponentInChildren<NukeControl>().projectile.GetComponent<NukeBehaviour>().maxSpeed.ToString();
 				info[3]=(Spawner.cannons[currentCannon].GetComponentInChildren<NukeControl>().angleRange*2).ToString();
 			}
 		}

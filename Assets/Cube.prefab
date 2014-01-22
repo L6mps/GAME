@@ -109,8 +109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 10
-  maxSpeed: 100
-  speed: 100
+  maxSpeed: 50
+  speed: 50
   currentSpeed: 0
   angle: 0
   range: 1000

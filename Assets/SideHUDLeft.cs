@@ -20,6 +20,8 @@ public class SideHUDLeft : MonoBehaviour {
 	public static int selectedResearch=-1;
 	private int researchingWeapon=-1;
 	static float researchProgress = 0;
+	string[] types=new string[4];
+	string[] researches=new string[4];
 
 	void Start() {
 		sectorButtons.fontSize = Screen.height / 50;
@@ -46,6 +48,14 @@ public class SideHUDLeft : MonoBehaviour {
 		for(int i = 1;i<20;i++){
 			researchState[i]=false;
 		}
+		types [0] = "Cannon";
+		types [1] = "Missile";
+		types [2] = "Nuke";
+		types [3] = "Mine";
+		researches [0] = "Reload";
+		researches [1] = "Speed";
+		researches [2] = "Angle";
+		researches [3] = "Range";
 	}
 
 	void Update() {
@@ -58,6 +68,56 @@ public class SideHUDLeft : MonoBehaviour {
 			researchProgress+=Time.deltaTime/10;
 			if(researchProgress>=1) {
 				researchState[researchingWeapon]=true;
+				switch (researchingWeapon){
+				case 4:{
+					CannonControl.cooldownCannon=0.5f;
+					break;
+				}
+				case 5:{
+					ProjectileFire.speedCannon=100;
+					break;
+				}
+				case 6:{
+					CannonControl.angleCannon=75;
+					break;
+				}
+				case 8:{
+					CannonControl.cooldownMissile=2;
+					break;
+				}
+				case 9:{
+					ProjectileFire.rangeMissile=1000;
+					break;
+				}
+				case 10:{
+					CannonControl.angleMissile=65;
+					break;
+				}
+				case 12:{
+					NukeControl.cooldownNuke=10;
+					break;
+				}
+				case 13:{
+					NukeBehaviour.maxSpeedNuke=100;
+					break;
+				}
+				case 14:{
+					NukeControl.angleNuke=true;
+					break;
+				}
+				case 16:{
+					CannonControl.cooldownMine=5;
+					break;
+				}
+				case 17:{
+					MineBehaviour.speedMine=100;
+					break;
+				}
+				case 18:{
+					CannonControl.angleMine=90;
+					break;
+				}
+				}
 				researchingWeapon=-1;
 				researchProgress=0;
 			}
@@ -109,7 +169,7 @@ public class SideHUDLeft : MonoBehaviour {
 		GUI.Box (new Rect(0,25*boxHeight,boxWidth*2, boxHeight), "Research", researchButtons);
 		for(int i=0;i<4;i++){
 			if(researchingWeapon!=i){
-				if(GUI.Button (new Rect(0,(26+i*1.5f)*boxHeight,boxWidth,boxHeight*1.5f), "R"+i, selectedResearch==i?selected:(researchState[i]?sectorButtons:researchButtons))){
+				if(GUI.Button (new Rect(0,(26+i*1.5f)*boxHeight,boxWidth,boxHeight*1.5f), types[i], selectedResearch==i?selected:(researchState[i]?sectorButtons:researchButtons))){
 					if(researchState[i]){
 						selectedResearch=i;
 					}
@@ -120,7 +180,7 @@ public class SideHUDLeft : MonoBehaviour {
 			}
 			else{
 				GUI.Box (new Rect(0,(26+i*1.5f)*boxHeight, (int)(researchProgress*((float)boxWidth)), boxHeight*1.5f), "", progressBarBack);
-				GUI.Box (new Rect(0,(26+i*1.5f)*boxHeight,boxWidth,boxHeight*1.5f), "R"+i, progressBarFront);
+				GUI.Box (new Rect(0,(26+i*1.5f)*boxHeight,boxWidth,boxHeight*1.5f), types[i], progressBarFront);
 			}
 		}
 		GUI.EndGroup();
@@ -137,19 +197,19 @@ public class SideHUDLeft : MonoBehaviour {
 		for(int j=0;j<3;j++){
 				if(researchingWeapon!=(r+1)*4+j){
 					if(!researchState[(r+1)*4+j]){
-						if(GUI.Button (new Rect(boxWidth,(26+2*j)*boxHeight,boxWidth,boxHeight*2), "V"+j, researchButtons)){
+						if(GUI.Button (new Rect(boxWidth,(26+2*j)*boxHeight,boxWidth,boxHeight*2), (j!=1)?researches[j]:(r!=1?researches[1]:researches[3]), researchButtons)){
 							if(researchingWeapon==-1){
 								researchingWeapon=(r+1)*4+j;
 							}
 						}
 					}
 					else{
-						GUI.Box (new Rect(boxWidth,(26+2*j)*boxHeight,boxWidth,boxHeight*2), "V"+j, selected);
+					GUI.Box (new Rect(boxWidth,(26+2*j)*boxHeight,boxWidth,boxHeight*2),(j!=1)?researches[j]:(r!=1?researches[1]:researches[3]), selected);
 					}
 				}
 				else{
 						GUI.Box (new Rect(boxWidth,(26+2*j)*boxHeight, (int)(researchProgress*((float)boxWidth)), boxHeight*2), "", progressBarBack);
-						GUI.Box (new Rect(boxWidth,(26+2*j)*boxHeight,boxWidth,boxHeight*2), "V"+j, progressBarFront);
+				GUI.Box (new Rect(boxWidth,(26+2*j)*boxHeight,boxWidth,boxHeight*2), (j!=1)?researches[j]:(r!=1?researches[1]:researches[3]), progressBarFront);
 				}
 		}
 	}

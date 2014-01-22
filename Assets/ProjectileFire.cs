@@ -8,6 +8,8 @@ public class ProjectileFire : MonoBehaviour {
 	public float currentSpeed;
 	public float angle;
 	public float range;
+	public static float rangeMissile = -1;
+	public static float speedCannon= -1;
 	public GameObject explosion;
 	Vector2 maxVel;
 	float sin;
@@ -28,6 +30,19 @@ public class ProjectileFire : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(transform.name=="Missile(Clone)"){
+			if(rangeMissile!=-1){
+				range=rangeMissile;
+				rangeMissile=-1;
+			}
+		}
+		else if(transform.name=="Mine(Clone"){
+			if(speedCannon!=-1){
+				maxSpeed=speedCannon;
+				speed=speedCannon;
+				speedCannon=-1;
+			}
+		}
 		currentSpeed=rigidbody2D.velocity.x/sin;
 		if (rigidbody2D.velocity != maxVel) {
 			if(Mathf.Abs(rigidbody2D.velocity.x)<Mathf.Abs (maxVel.x)){

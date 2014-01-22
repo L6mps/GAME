@@ -8,6 +8,7 @@ public class MineBehaviour : MonoBehaviour {
 	public float currentSpeed;
 	public float angle;
 	public float range;
+	public static float speedMine = -1;
 	private float target=float.MaxValue;
 	private float stepX;
 	private float stepY;
@@ -36,6 +37,11 @@ public class MineBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(speedMine!=-1){
+			speed=speedMine;
+			maxSpeed=speedMine;
+			speedMine=-1;
+		}
 		currentSpeed=rigidbody2D.velocity.x/sin;
 		if (rigidbody2D.velocity != maxVel) {
 			if(Mathf.Abs(rigidbody2D.velocity.x)<Mathf.Abs (maxVel.x)){
@@ -57,7 +63,9 @@ public class MineBehaviour : MonoBehaviour {
 		
 	}
 	void OnCollisionEnter2D(Collision2D collision){
+		if(!collision.transform.name.Equals("Enemy 1(Clone)")){
 			Instantiate (explosion, transform.position,transform.rotation);
 			Destroy (gameObject);
+		}
 	}
 }

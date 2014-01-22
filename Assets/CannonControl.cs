@@ -5,6 +5,12 @@ public class CannonControl : MonoBehaviour {
 	public float angleRange=75;
 	public float range=500;
 	public float cooldown=1;
+	public static float cooldownCannon=-1;
+	public static float angleCannon = -1;
+	public static float cooldownMissile=-1;
+	public static float angleMissile = -1;
+	public static float cooldownMine=-1;
+	public static float angleMine = -1;
 	private float angle=Mathf.PI/2F;
 	public GameObject projectile;
 	public string cannonType;
@@ -37,6 +43,44 @@ public class CannonControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		switch(cannonType){
+		case "cannon":
+			if(cooldownCannon!=-1){
+				cooldown=cooldownCannon;
+				cooldownCannon=-1;
+			}
+			if(angleCannon!=-1){
+				angleRange=angleCannon;
+				maxAngle=objectAngle+angleRange;
+				minAngle=objectAngle-angleRange;
+				angleCannon=-1;
+			}
+			break;
+		case "missile":
+			if(cooldownMissile!=-1){
+				cooldown=cooldownMissile;
+				cooldownMissile=-1;
+			}
+			if(angleMissile!=-1){
+				angleRange=angleMissile;
+				maxAngle=objectAngle+angleRange;
+				minAngle=objectAngle-angleRange;
+				angleMissile=-1;
+			}
+			break;
+		case "mine":
+			if(cooldownMine!=-1){
+				cooldown=cooldownMine;
+				cooldownMine=-1;
+			}
+			if(angleMine!=-1){
+				angleRange=angleMine;
+				maxAngle=objectAngle+angleRange;
+				minAngle=objectAngle-angleRange;
+				angleMine=-1;
+			}
+			break;
+		}
 		if(reload!=cooldown){
 			if(reload<cooldown)
 				reload+=Time.deltaTime;

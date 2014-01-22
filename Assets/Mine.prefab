@@ -109,12 +109,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 0
-  maxSpeed: 100
-  speed: 100
+  maxSpeed: 50
+  speed: 50
   currentSpeed: 0
   angle: 0
   range: 0
-  explosion: {fileID: 100000, guid: 041b631a684519a4b9d17ba8e17a869e, type: 2}
+  explosion: {fileID: 100000, guid: 44c4e524a9e6e7144918ccf6317e0040, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -8,6 +8,7 @@ public class NukeBehaviour : MonoBehaviour {
 	public float currentSpeed;
 	public float angle;
 	public GameObject explosion;
+	public static float maxSpeedNuke = -1;
 	private Vector2 maxVel;
 	private float sin;
 	private float cos;
@@ -62,6 +63,10 @@ public class NukeBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(maxSpeedNuke!=-1){
+			maxSpeed=maxSpeedNuke;
+			maxSpeedNuke=-1;
+		}
 		targetTemp.x = target.x - transform.position.x;
 		targetTemp.y = target.y - transform.position.y;
 		currentSpeed=rigidbody2D.velocity.magnitude;
@@ -112,6 +117,12 @@ public class NukeBehaviour : MonoBehaviour {
 		if(Mathf.Abs (transform.position.x-target.x)<10 && Mathf.Abs (transform.position.y-target.y)<10){
 			Instantiate(explosion,transform.position,transform.rotation);
 			Destroy (gameObject);
+		}
+	}
+	void OnCollisionEnter2D(Collision2D collision){
+		if(collision.transform.name.Equals("Mothership 2(Clone)")){
+		   Instantiate(explosion,transform.position,transform.rotation);
+		   Destroy (gameObject);
 		}
 	}
 }

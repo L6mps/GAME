@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3251f0147b89cd4449f80e076f1ab9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angleRange: 50
+  angleRange: 45
   range: 60
   cooldown: 10
   projectile: {fileID: 100000, guid: 1dcd4efad5fcd3b4c9f52d1415d78b8b, type: 2}
