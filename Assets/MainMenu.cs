@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour {
 	int numberOfGlossaryItems = 13;
 	public GUIStyle style;
 	public GUIStyle glossaryStyle;
+	public GUIStyle background;
 	public Texture[] glossaryPic;
 	public string[] glossaryText;
 	public string[] glossaryLabels;
@@ -17,7 +18,7 @@ public class MainMenu : MonoBehaviour {
 	void Start() {
 		glossaryText = new string[numberOfGlossaryItems];
 		glossaryLabels = new string[numberOfGlossaryItems];
-		style.fontSize = ((int) Screen.height/50);
+		style.fontSize = ((int) Screen.height/40);
 		selected = 0;
 		glossaryLabels[0] = "Sector";
 		glossaryLabels[1] = "Enemies";
@@ -67,6 +68,7 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	void OnGUI() {
+		GUI.Box (new Rect(Screen.width/2-2*Screen.height/3,0,Screen.height, Screen.height), "", background);
 		int x1 = Screen.width/2 - Screen.width/8;
 		int xLen = Screen.width/4;
 		int y1 = Screen.height/2 - Screen.height/4;

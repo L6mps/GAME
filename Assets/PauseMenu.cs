@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		sty.fontSize = Screen.height / 40;
 	}
 	
 	// Update is called once per frame
